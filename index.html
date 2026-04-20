@@ -1,0 +1,2039 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Marcos López — Network &amp; Security Engineer</title>
+ 
+  <!-- SEO -->
+  <meta name="description" content="Portfolio de Marcos López — Network &amp; Infrastructure Security Engineer, ISO/IEC 27001 Auditor. Especialista en infraestructuras de red, ciberseguridad y sistemas en ACORDE Technologies." />
+  <meta name="keywords" content="Marcos López, Network Engineer, Security Engineer, MikroTik, ISO 27001, Ciberseguridad, Infraestructura de Red, Wazuh, CrowdSec, Proxmox, Grafana, España" />
+  <meta name="author" content="Marcos López" />
+  <meta property="og:title" content="Marcos López — Network &amp; Security Engineer" />
+  <meta property="og:description" content="Network &amp; Infrastructure Security Engineer · ISO/IEC 27001 Auditor · ACORDE Technologies" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Marcos López — Network &amp; Security Engineer" />
+ 
+  <!-- Google Fonts with font-display:swap -->
+  <link rel="preconnect" href=https://fonts.googleapis.com />
+  <link rel="preconnect" href=https://fonts.gstatic.com crossorigin />
+  <link href=https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap&text=swap rel="stylesheet" />
+ 
+  <style>
+    /* ─── RESET & TOKENS ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+    :root {
+      /* backgrounds */
+      --bg:       #04070f;
+      --bg2:      #080d1a;
+      --bg3:      #0b1120;
+      --card:     #0e1526;
+      --card-hi:  #111c30;
+      /* borders */
+      --b0:       rgba(255,255,255,.055);
+      --bc:       rgba(34,211,238,.28);
+      --ba:       rgba(245,158,11,.28);
+      --bg-btn:   rgba(34,211,238,.11);
+      /* accent */
+      --cyan:     #22d3ee;
+      --cyan-lo:  rgba(34,211,238,.10);
+      --cyan-mid: rgba(34,211,238,.20);
+      --cyan-glo: rgba(34,211,238,.18);
+      --amber:    #f59e0b;
+      --amber-lo: rgba(245,158,11,.09);
+      --green:    #34d399;
+      /* text */
+      --t1:  #f1f5f9;
+      --t2:  #94a3b8;
+      --t3:  #475569;
+      --t4:  #2a3a50;
+      /* type */
+      --fd: 'Syne', sans-serif;
+      --fm: 'IBM Plex Mono', monospace;
+      --fb: 'Instrument Sans', sans-serif;
+      /* motion */
+      --ease-out:    cubic-bezier(.16,1,.3,1);
+      --ease-spring: cubic-bezier(.34,1.56,.64,1);
+    }
+ 
+    html { scroll-behavior: smooth; font-size: 16px; }
+ 
+    body {
+      background: var(--bg);
+      color: var(--t1);
+      font-family: var(--fb);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+ 
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 2px; }
+ 
+    /* ── Focus styles (visible for keyboard users) ── */
+    :focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 3px;
+    }
+    :focus:not(:focus-visible) { outline: none; }
+ 
+    /* ── Skip link ── */
+    .skip-link {
+      position: absolute;
+      left: 1rem; top: -4rem;
+      background: var(--cyan);
+      color: var(--bg);
+      font-family: var(--fm);
+      font-size: .75rem;
+      padding: .5rem 1rem;
+      z-index: 9999;
+      transition: top .2s;
+      font-weight: 600;
+      letter-spacing: .05em;
+    }
+    .skip-link:focus { top: 1rem; }
+ 
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+ 
+    /* ── Noise overlay ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: .022;
+    }
+ 
+    /* ─── PROGRESS BAR ─── */
+    #progress {
+      position: fixed; top: 0; left: 0; z-index: 999;
+      height: 2px; width: 0%;
+      background: linear-gradient(90deg, var(--cyan), var(--amber));
+      transition: width .08s linear;
+      pointer-events: none;
+    }
+ 
+    /* ─── NAV ─── */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.15rem 2.5rem;
+      background: rgba(4,7,15,.8);
+      backdrop-filter: blur(18px) saturate(1.5);
+      -webkit-backdrop-filter: blur(18px) saturate(1.5);
+      border-bottom: 1px solid var(--b0);
+      transition: padding .3s var(--ease-out), background .3s;
+    }
+    #nav.scrolled { padding-top: .7rem; padding-bottom: .7rem; background: rgba(4,7,15,.92); }
+ 
+    .nav-logo {
+      font-family: var(--fd);
+      font-weight: 800;
+      font-size: 1.05rem;
+      letter-spacing: -.025em;
+      color: var(--t1);
+      min-width: 44px; min-height: 44px;
+      display: flex; align-items: center;
+    }
+    .nav-logo em { color: var(--cyan); font-style: normal; }
+ 
+    .nav-links {
+      display: flex; gap: 1.75rem; list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--fm);
+      font-size: .67rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--t3);
+      padding: .5rem 0;
+      transition: color .2s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: var(--cyan);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .25s var(--ease-out);
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--cyan); }
+    .nav-links a.active::after, .nav-links a:hover::after { transform: scaleX(1); }
+ 
+    .nav-btn {
+      font-family: var(--fm);
+      font-size: .67rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      border: 1px solid var(--bc);
+      padding: .55rem 1.1rem;
+      min-height: 44px;
+      display: flex; align-items: center;
+      background: var(--bg-btn);
+      transition: background .2s, color .2s, transform .15s var(--ease-spring);
+      cursor: pointer;
+    }
+    .nav-btn:hover { background: var(--cyan); color: var(--bg); transform: translateY(-1px); }
+ 
+    .nav-hamburger {
+      display: none;
+      background: none; border: 1px solid var(--b0);
+      cursor: pointer; padding: .6rem;
+      color: var(--t2);
+      min-width: 44px; min-height: 44px;
+      align-items: center; justify-content: center;
+    }
+ 
+    /* ── Mobile drawer ── */
+    #mobile-menu {
+      position: fixed; inset: 0; z-index: 90;
+      background: rgba(4,7,15,.97);
+      backdrop-filter: blur(24px);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 1.75rem;
+      opacity: 0; pointer-events: none;
+      transition: opacity .3s var(--ease-out);
+    }
+    #mobile-menu.open { opacity: 1; pointer-events: all; }
+    #mobile-menu a {
+      font-family: var(--fd);
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: -.02em;
+      color: var(--t2);
+      transition: color .2s;
+      min-height: 44px; display: flex; align-items: center;
+    }
+    #mobile-menu a:hover { color: var(--t1); }
+ 
+    /* ─── HERO ─── */
+    #hero {
+      position: relative;
+      min-height: 100dvh;
+      display: flex; align-items: center;
+      padding: 7rem 2.5rem 4rem;
+      overflow: hidden;
+    }
+ 
+    #hero-canvas {
+      position: absolute; inset: 0;
+      opacity: .38;
+    }
+ 
+    /* Vertical accent line */
+    #hero::after {
+      content: '';
+      position: absolute; right: 0; top: 0; bottom: 0; width: 1px;
+      background: linear-gradient(180deg,transparent,var(--bc) 25%,var(--bc) 75%,transparent);
+    }
+ 
+    .hero-inner {
+      position: relative; z-index: 2;
+      max-width: 1100px; margin: 0 auto; width: 100%;
+    }
+ 
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-family: var(--fm);
+      font-size: .63rem; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--cyan);
+      border: 1px solid var(--bc); background: var(--cyan-lo);
+      padding: .32rem .8rem;
+      margin-bottom: 1.75rem;
+      animation: fadeUp .6s var(--ease-out) .1s both;
+    }
+    .hero-badge-dot {
+      width: 5px; height: 5px; border-radius: 50%; background: var(--cyan);
+      animation: pulse 2s infinite;
+      flex-shrink: 0;
+    }
+ 
+    .hero-name {
+      font-family: var(--fd);
+      font-weight: 800;
+      font-size: clamp(3.8rem, 9vw, 7.5rem);
+      line-height: .93;
+      letter-spacing: -.03em;
+      animation: fadeUp .65s var(--ease-out) .15s both;
+    }
+    .hero-name .stroke {
+      -webkit-text-stroke: 1px rgba(241,245,249,.18);
+      color: transparent;
+    }
+ 
+    .hero-role {
+      font-family: var(--fm);
+      font-size: clamp(.82rem, 1.8vw, 1rem);
+      color: var(--cyan);
+      margin: 1.5rem 0 1.25rem;
+      min-height: 1.5em;
+      animation: fadeUp .65s var(--ease-out) .25s both;
+    }
+    .cursor {
+      display: inline-block;
+      width: 2px; height: .88em;
+      background: var(--cyan);
+      margin-left: 2px;
+      vertical-align: text-bottom;
+      animation: blink 1s step-end infinite;
+    }
+ 
+    .hero-tagline {
+      font-size: clamp(.9rem, 1.6vw, 1.08rem);
+      color: var(--t2);
+      max-width: 540px; line-height: 1.8;
+      margin-bottom: 2.25rem;
+      animation: fadeUp .65s var(--ease-out) .35s both;
+    }
+    .hero-tagline strong { color: var(--t1); }
+ 
+    .hero-actions {
+      display: flex; gap: .85rem; flex-wrap: wrap;
+      animation: fadeUp .65s var(--ease-out) .45s both;
+    }
+ 
+    /* ── Buttons ── */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: var(--fm);
+      font-size: .75rem; letter-spacing: .06em;
+      min-height: 44px; padding: 0 1.75rem;
+      cursor: pointer;
+      transition: transform .2s var(--ease-spring), background .2s, color .2s, border-color .2s, box-shadow .2s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: translateY(0); }
+ 
+    .btn-primary {
+      background: var(--cyan); color: var(--bg);
+      border: 1px solid var(--cyan);
+    }
+    .btn-primary:hover {
+      background: #67e8f9; border-color: #67e8f9;
+      box-shadow: 0 6px 24px rgba(34,211,238,.25);
+    }
+ 
+    .btn-ghost {
+      background: transparent; color: var(--t2);
+      border: 1px solid var(--b0);
+    }
+    .btn-ghost:hover { border-color: var(--bc); color: var(--cyan); }
+ 
+    .hero-stats {
+      display: flex; gap: 3rem; flex-wrap: wrap;
+      margin-top: 4rem; padding-top: 2rem;
+      border-top: 1px solid var(--b0);
+      animation: fadeUp .65s var(--ease-out) .55s both;
+    }
+    .stat-val {
+      font-family: var(--fd); font-weight: 700;
+      font-size: 2.1rem; line-height: 1;
+    }
+    .stat-val em { color: var(--cyan); font-style: normal; }
+    .stat-lbl {
+      font-family: var(--fm); font-size: .58rem;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--t3); margin-top: .3rem;
+    }
+ 
+    /* ─── SECTIONS ─── */
+    .section {
+      padding: 6rem 2.5rem;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .divider { height: 1px; background: var(--b0); max-width: 1100px; margin: 0 auto; }
+ 
+    .eye {
+      font-family: var(--fm); font-size: .6rem;
+      letter-spacing: .15em; text-transform: uppercase;
+      color: var(--cyan);
+      display: flex; align-items: center; gap: .6rem;
+      margin-bottom: .6rem;
+    }
+    .eye::after { content: ''; flex: 1; max-width: 44px; height: 1px; background: var(--bc); }
+ 
+    .sh {
+      font-family: var(--fd); font-weight: 700;
+      font-size: clamp(1.85rem, 3.5vw, 2.55rem);
+      letter-spacing: -.025em; line-height: 1.1;
+      margin-bottom: .8rem;
+    }
+ 
+    .ssub {
+      font-size: .95rem; color: var(--t2);
+      max-width: 580px; line-height: 1.8;
+      margin-bottom: 3rem;
+    }
+ 
+    /* ── Scroll reveal ── */
+    .reveal {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity .7s var(--ease-out), transform .7s var(--ease-out);
+    }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+ 
+    /* staggered children */
+    .stagger > * {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity .55s var(--ease-out), transform .55s var(--ease-out);
+    }
+    .stagger.in > * { opacity: 1; transform: translateY(0); }
+    .stagger.in > *:nth-child(1) { transition-delay: .05s; }
+    .stagger.in > *:nth-child(2) { transition-delay: .12s; }
+    .stagger.in > *:nth-child(3) { transition-delay: .19s; }
+    .stagger.in > *:nth-child(4) { transition-delay: .26s; }
+    .stagger.in > *:nth-child(5) { transition-delay: .33s; }
+    .stagger.in > *:nth-child(6) { transition-delay: .40s; }
+ 
+    /* ─── ICON SYSTEM (SVG, 20×20, stroke 1.5) ─── */
+    .icon {
+      width: 20px; height: 20px;
+      flex-shrink: 0;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .icon-wrap {
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .icon-wrap-cyan  { background: var(--cyan-lo);  border: 1px solid var(--bc); color: var(--cyan); }
+    .icon-wrap-amber { background: var(--amber-lo); border: 1px solid var(--ba); color: var(--amber); }
+ 
+    /* ─── ABOUT ─── */
+    .about-grid {
+      display: grid; grid-template-columns: 1.1fr .9fr;
+      gap: 4rem; align-items: start;
+    }
+ 
+    .about-text p {
+      color: var(--t2); line-height: 1.85;
+      margin-bottom: 1.15rem; font-size: .95rem;
+    }
+    .about-text p strong { color: var(--t1); }
+    .about-text p code {
+      font-family: var(--fm); font-size: .82em;
+      color: var(--cyan); background: var(--cyan-lo);
+      padding: .08em .35em; border-radius: 2px;
+    }
+ 
+    .diff-callout {
+      margin-top: 1.75rem;
+      border-left: 2px solid var(--bc);
+      padding: 1rem 1.25rem;
+      background: var(--cyan-lo);
+    }
+    .diff-callout p {
+      font-family: var(--fm); font-size: .78rem;
+      color: var(--t2); line-height: 1.7;
+      margin-bottom: 0 !important;
+    }
+    .diff-callout p strong { color: var(--cyan); }
+ 
+    .info-cards { display: flex; flex-direction: column; gap: .75rem; }
+ 
+    .info-card {
+      display: flex; align-items: flex-start; gap: .9rem;
+      background: var(--card);
+      border: 1px solid var(--b0);
+      padding: 1rem 1.25rem;
+      transition: border-color .2s, transform .2s var(--ease-spring), box-shadow .2s;
+      cursor: default;
+    }
+    .info-card:hover {
+      border-color: var(--bc);
+      transform: translateX(3px);
+      box-shadow: 0 0 20px var(--cyan-glo);
+    }
+ 
+    .ic-title { font-family: var(--fd); font-size: .85rem; font-weight: 600; margin-bottom: .2rem; }
+    .ic-sub { font-family: var(--fm); font-size: .67rem; color: var(--t2); line-height: 1.5; }
+ 
+    /* ─── SKILLS ─── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.15rem;
+    }
+ 
+    .skill-card {
+      background: var(--card);
+      border: 1px solid var(--b0);
+      padding: 1.5rem;
+      transition: border-color .2s, transform .25s var(--ease-spring), box-shadow .2s;
+    }
+    .skill-card:hover {
+      border-color: var(--bc);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(34,211,238,.07);
+    }
+ 
+    .sk-head {
+      display: flex; align-items: center; gap: .7rem;
+      padding-bottom: 1rem; border-bottom: 1px solid var(--b0);
+      margin-bottom: 1.1rem;
+      color: var(--cyan);
+    }
+    .sk-title { font-family: var(--fd); font-size: .9rem; font-weight: 600; color: var(--t1); }
+ 
+    .tags { display: flex; flex-wrap: wrap; gap: .38rem; }
+    .tag {
+      font-family: var(--fm); font-size: .61rem; letter-spacing: .02em;
+      color: var(--t3); border: 1px solid var(--b0);
+      padding: .22rem .55rem;
+      transition: all .15s; cursor: default;
+    }
+    .tag:hover, .tag.hi { background: var(--cyan-lo); border-color: var(--bc); color: var(--cyan); }
+    .tag.amber { background: var(--amber-lo); border-color: var(--ba); color: var(--amber); }
+ 
+    /* ─── ARQUITECTURAS ─── */
+    .arch-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.15rem;
+    }
+ 
+    .arch-card {
+      background: var(--card);
+      border: 1px solid var(--b0);
+      border-top: 2px solid var(--bc);
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: border-color .2s, transform .25s var(--ease-spring), box-shadow .2s;
+    }
+    .arch-card:hover {
+      border-color: var(--bc);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 36px rgba(34,211,238,.08);
+    }
+ 
+    .arch-head {
+      padding: 1.4rem 1.5rem 1rem;
+      border-bottom: 1px solid var(--b0);
+    }
+    .arch-num {
+      font-family: var(--fm);
+      font-size: .58rem; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--t3); margin-bottom: .5rem;
+    }
+    .arch-title {
+      font-family: var(--fd); font-weight: 700;
+      font-size: 1rem; line-height: 1.25;
+    }
+    .arch-ctx {
+      font-family: var(--fm);
+      font-size: .68rem; color: var(--cyan);
+      margin-top: .35rem;
+    }
+ 
+    .arch-body { padding: 1.25rem 1.5rem; flex: 1; }
+ 
+    .arch-block { margin-bottom: 1rem; }
+    .arch-block:last-child { margin-bottom: 0; }
+    .arch-block-lbl {
+      font-family: var(--fm);
+      font-size: .58rem; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--t3); margin-bottom: .5rem;
+    }
+ 
+    .arch-list {
+      list-style: none; display: flex; flex-direction: column; gap: .35rem;
+    }
+    .arch-list li {
+      font-family: var(--fm);
+      font-size: .72rem; color: var(--t2); line-height: 1.5;
+      display: flex; align-items: baseline; gap: .5rem;
+    }
+    .arch-list li::before {
+      content: '—';
+      color: var(--bc); flex-shrink: 0;
+      font-size: .65rem;
+    }
+ 
+    .arch-value {
+      margin-top: auto;
+      padding: .9rem 1.5rem;
+      border-top: 1px solid var(--b0);
+      background: var(--cyan-lo);
+    }
+    .arch-value-lbl {
+      font-family: var(--fm);
+      font-size: .58rem; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--cyan); margin-bottom: .3rem;
+    }
+    .arch-value-txt {
+      font-size: .82rem; color: var(--t2); line-height: 1.55;
+    }
+ 
+    @media (max-width: 900px) {
+      .arch-grid { grid-template-columns: 1fr; }
+    }
+ 
+    /* ─── PROJECTS ─── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.15rem;
+    }
+ 
+    .proj-card {
+      background: var(--card);
+      border: 1px solid var(--b0);
+      display: flex; flex-direction: column;
+      transition: border-color .2s, transform .25s var(--ease-spring), box-shadow .2s;
+    }
+    .proj-card:hover {
+      border-color: var(--bc);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 40px rgba(34,211,238,.07);
+    }
+    .proj-card.wide { grid-column: span 2; }
+ 
+    .proj-head {
+      padding: 1.35rem 1.6rem;
+      border-bottom: 1px solid var(--b0);
+      display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem;
+    }
+    .proj-type {
+      font-family: var(--fm); font-size: .58rem;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--cyan); margin-bottom: .4rem;
+    }
+    .proj-title {
+      font-family: var(--fd); font-weight: 700;
+      font-size: 1.05rem; line-height: 1.3;
+    }
+    .proj-icon { color: var(--bc); flex-shrink: 0; }
+ 
+    .proj-body { padding: 1.35rem 1.6rem; flex: 1; display: flex; flex-direction: column; gap: .9rem; }
+    .proj-lbl {
+      font-family: var(--fm); font-size: .58rem;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--t3); margin-bottom: .3rem;
+    }
+    .proj-txt {
+      font-size: .875rem; color: var(--t2); line-height: 1.65;
+    }
+    .proj-txt code {
+      font-family: var(--fm); font-size: .82em;
+      color: var(--cyan); background: var(--cyan-lo);
+      padding: .05em .3em;
+    }
+ 
+    .proj-foot {
+      padding: .9rem 1.6rem;
+      border-top: 1px solid var(--b0);
+      display: flex; flex-wrap: wrap; gap: .35rem;
+    }
+    .tech {
+      font-family: var(--fm); font-size: .58rem; letter-spacing: .04em;
+      color: var(--t4); background: rgba(255,255,255,.03);
+      border: 1px solid var(--b0); padding: .18rem .5rem;
+    }
+ 
+    /* ─── EDUCATION ─── */
+    .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+ 
+    .block-label {
+      font-family: var(--fm); font-size: .58rem;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--t3); margin-bottom: 1.75rem;
+    }
+ 
+    .timeline { position: relative; padding-left: 1.75rem; }
+    .timeline::before {
+      content: ''; position: absolute;
+      left: 0; top: .4rem; bottom: 0;
+      width: 1px; background: var(--b0);
+    }
+ 
+    .tl-item { position: relative; padding-bottom: 2.25rem; }
+    .tl-item::before {
+      content: ''; position: absolute;
+      left: -2.22rem; top: .35rem;
+      width: 9px; height: 9px; border-radius: 50%;
+      background: var(--bg); border: 2px solid var(--bc);
+      transition: box-shadow .3s;
+    }
+    .tl-item.active::before {
+      background: var(--cyan);
+      box-shadow: 0 0 12px rgba(34,211,238,.55);
+    }
+ 
+    .tl-date { font-family: var(--fm); font-size: .63rem; color: var(--t3); letter-spacing: .06em; margin-bottom: .4rem; }
+    .tl-title { font-family: var(--fd); font-weight: 700; font-size: 1.05rem; margin-bottom: .2rem; }
+    .tl-org { font-family: var(--fm); font-size: .72rem; color: var(--cyan); margin-bottom: .5rem; }
+    .tl-desc { font-size: .875rem; color: var(--t2); line-height: 1.65; max-width: 480px; }
+ 
+    .certs { display: flex; flex-direction: column; gap: .75rem; }
+ 
+    .cert-card {
+      display: flex; align-items: center; gap: 1rem;
+      background: var(--card); border: 1px solid var(--b0);
+      padding: 1.05rem 1.25rem;
+      transition: border-color .2s, transform .2s var(--ease-spring);
+    }
+    .cert-card:hover { border-color: var(--ba); transform: translateX(3px); }
+ 
+    .cert-name { font-family: var(--fd); font-size: .9rem; font-weight: 600; margin-bottom: .2rem; }
+    .cert-issuer { font-family: var(--fm); font-size: .64rem; color: var(--t3); }
+ 
+    /* Terminal */
+    .terminal {
+      margin-top: 1.5rem;
+      background: rgba(0,0,0,.45);
+      border: 1px solid var(--b0);
+      border-top: 2px solid var(--cyan);
+    }
+    .terminal-bar {
+      display: flex; align-items: center; gap: .5rem;
+      padding: .6rem 1rem;
+      border-bottom: 1px solid var(--b0);
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-r { background: #ff5f57; }
+    .dot-y { background: #febc2e; }
+    .dot-g { background: #28c840; }
+    .terminal-body {
+      padding: 1rem 1.25rem;
+      font-family: var(--fm); font-size: .7rem; line-height: 1.9; color: var(--t2);
+    }
+    .tp { color: var(--cyan); }
+    .tk { color: var(--amber); }
+    .tv { color: var(--green); }
+    .tc { color: var(--t3); font-style: italic; }
+ 
+    /* ─── CONTACT ─── */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+ 
+    .contact-intro { font-size: .95rem; color: var(--t2); line-height: 1.85; margin-bottom: 1.75rem; }
+    .contact-intro strong { color: var(--t1); }
+ 
+    .contact-links { display: flex; flex-direction: column; gap: .75rem; }
+ 
+    .contact-link {
+      display: flex; align-items: center; gap: 1rem;
+      background: var(--card); border: 1px solid var(--b0);
+      padding: 1rem 1.25rem; min-height: 64px;
+      transition: border-color .2s, transform .2s var(--ease-spring), box-shadow .2s;
+    }
+    .contact-link:hover {
+      border-color: var(--bc); transform: translateX(4px);
+      box-shadow: 0 4px 20px var(--cyan-glo);
+    }
+ 
+    .cl-lbl { font-family: var(--fm); font-size: .58rem; letter-spacing: .1em; text-transform: uppercase; color: var(--t3); margin-bottom: .2rem; }
+    .cl-val { font-size: .9rem; font-weight: 500; }
+    .cl-arrow { margin-left: auto; color: var(--t3); font-family: var(--fm); font-size: .8rem; transition: color .2s, transform .2s; }
+    .contact-link:hover .cl-arrow { color: var(--cyan); transform: translateX(3px); }
+ 
+    .contact-cta {
+      background: var(--card); border: 1px solid var(--b0);
+      padding: 2.25rem;
+    }
+    .contact-cta h3 {
+      font-family: var(--fd); font-weight: 700;
+      font-size: 1.5rem; margin-bottom: .85rem; letter-spacing: -.02em;
+    }
+    .contact-cta p { font-size: .9rem; color: var(--t2); line-height: 1.8; margin-bottom: 1.25rem; }
+    .contact-cta p strong { color: var(--t1); }
+    .contact-cta p:last-of-type { margin-bottom: 1.5rem; }
+ 
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--b0);
+      padding: 2rem 2.5rem;
+      text-align: center;
+      font-family: var(--fm); font-size: .63rem;
+      color: var(--t3); letter-spacing: .06em;
+    }
+    footer span { color: var(--cyan); }
+ 
+    /* ─── KEYFRAMES ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+    @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .5; transform: scale(.72); } }
+ 
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .about-grid, .edu-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .proj-card.wide { grid-column: span 1; }
+      .proj-card.wide .proj-body[style*="grid"] { display: flex !important; flex-direction: column !important; }
+    }
+ 
+    @media (max-width: 768px) {
+      #nav { padding: .9rem 1.25rem; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      #hero { padding: 5.5rem 1.25rem 3rem; }
+      .hero-stats { gap: 1.5rem; }
+      .section { padding: 4rem 1.25rem; }
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+ 
+    /* ─── REDUCED MOTION ─── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+      .reveal, .stagger > * { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+ 
+<!-- Skip navigation (accessibility) -->
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+ 
+<div id="progress" role="progressbar" aria-hidden="true"></div>
+ 
+<!-- ════════ NAV ════════ -->
+<nav id="nav" aria-label="Navegación principal">
+  <a href="#hero" class="nav-logo" aria-label="Inicio — Marcos López">ML<em>.</em></a>
+ 
+  <ul class="nav-links" role="list">
+    <li><a href="#about"        data-section="about">Perfil</a></li>
+    <li><a href="#skills"       data-section="skills">Stack</a></li>
+    <li><a href="#arquitecturas" data-section="arquitecturas">Arquitecturas</a></li>
+    <li><a href="#projects"     data-section="projects">Proyectos</a></li>
+    <li><a href="#education"    data-section="education">Formación</a></li>
+    <li><a href="#contact"      data-section="contact">Contacto</a></li>
+  </ul>
+ 
+  <a href="#contact" class="nav-btn" aria-label="Ir a la sección de contacto">$ contact</a>
+ 
+  <button class="nav-hamburger" id="hamburger-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+      <path d="M4 6h16M4 12h16M4 18h16"/>
+    </svg>
+  </button>
+</nav>
+ 
+<!-- Mobile menu -->
+<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menú de navegación móvil">
+  <a href="#about"         onclick="closeMenu()">Perfil</a>
+  <a href="#skills"        onclick="closeMenu()">Stack</a>
+  <a href="#arquitecturas" onclick="closeMenu()">Arquitecturas</a>
+  <a href="#projects"      onclick="closeMenu()">Proyectos</a>
+  <a href="#education"     onclick="closeMenu()">Formación</a>
+  <a href="#contact"       onclick="closeMenu()">Contacto</a>
+</div>
+ 
+<!-- ════════ HERO ════════ -->
+<main id="main-content">
+<section id="hero" aria-label="Presentación principal">
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+ 
+  <div class="hero-inner">
+    <div class="hero-badge" aria-label="Estado: disponible para nuevas oportunidades">
+      <span class="hero-badge-dot" aria-hidden="true"></span>
+      Disponible para nuevas oportunidades
+    </div>
+ 
+    <h1 class="hero-name">
+      Marcos<br>
+      <span class="stroke">López</span>
+    </h1>
+ 
+    <p style="margin-top:1rem; font-family:var(--fm); color:var(--t2); font-size:.82rem; line-height:1.7; animation: fadeUp .65s var(--ease-out) .2s both;">
+      Network &amp; Infrastructure Security Engineer<br>
+      ISO/IEC 27001 Auditor · ACORDE Technologies
+    </p>
+ 
+    <p class="hero-role" aria-live="polite" aria-label="Rol actual">
+      <span id="tw"></span><span class="cursor" aria-hidden="true"></span>
+    </p>
+ 
+    <p class="hero-tagline">
+      Diseño infraestructuras de red resilientes y seguras en entornos de producción,
+      integrando alta disponibilidad, segmentación avanzada y controles alineados con ISO&nbsp;27001.<br><br>
+      Especializado en transformar entornos operativos en sistemas auditables, reproducibles y preparados para entornos críticos.
+    </p>
+ 
+    <div class="hero-actions">
+      <a href="#projects" class="btn btn-primary">Ver proyectos</a>
+      <a href="#contact"  class="btn btn-ghost">Contactar</a>
+    </div>
+ 
+    <div class="hero-stats" aria-label="Estadísticas">
+      <div>
+        <div class="stat-val">3<em>+</em></div>
+        <div class="stat-lbl">Años experiencia</div>
+      </div>
+      <div>
+        <div class="stat-val">15<em>+</em></div>
+        <div class="stat-lbl">Tecnologías</div>
+      </div>
+      <div>
+        <div class="stat-val">2</div>
+        <div class="stat-lbl">Titulaciones</div>
+      </div>
+      <div>
+        <div class="stat-val">1</div>
+        <div class="stat-lbl">Cert. ISO</div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<div class="divider"></div>
+ 
+<!-- ════════ ABOUT ════════ -->
+<section id="about" class="section" aria-labelledby="about-h">
+  <div class="reveal">
+    <div class="eye">01 — Perfil</div>
+    <h2 class="sh" id="about-h">Sobre mí</h2>
+  </div>
+ 
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <p>
+        Soy <strong>Ingeniero de Redes e Infraestructuras</strong> con especialización en seguridad,
+        actualmente en <code>ACORDE Technologies</code>. Mi trabajo consiste en diseñar y operar
+        infraestructuras de red de producción que combinan alta disponibilidad con controles de
+        seguridad reales.
+      </p>
+      <p>
+        Mi formación abarca desde el diseño de redes a nivel ingenieril hasta el análisis de riesgos
+        y la implementación de controles bajo el marco <strong>ISO/IEC 27001</strong>. No solo
+        configuro equipos: entiendo el contexto de negocio detrás de cada decisión técnica.
+      </p>
+      <p>
+        Trabajo en el punto de intersección entre <strong>infraestructura</strong>,
+        <strong>seguridad</strong> y <strong>automatización</strong>. Cuando las herramientas
+        existentes no son suficientes, las desarrollo — como el generador de configuraciones
+        MikroTik en producción.
+      </p>
+      <p>
+        Mi siguiente paso: incorporarme a un entorno de <strong>ciberseguridad avanzada</strong>,
+        consultoría técnica o diseño de arquitecturas seguras en organizaciones de envergadura.
+      </p>
+ 
+      <p>
+        No me limito a implementar infraestructura: diseño sistemas resilientes, seguros y auditables
+        alineados con necesidades reales de negocio.
+      </p>
+ 
+      <div class="diff-callout" role="note" aria-label="Diferenciación profesional">
+        <p>
+          <strong>Lo que me distingue:</strong> combino visión de red de extremo a extremo con
+          criterio de seguridad desde el diseño. No es común encontrar a alguien que sepa tanto
+          configurar un VRRP como auditar controles ISO 27001 o construir la herramienta
+          que automatiza el proceso.
+        </p>
+      </div>
+ 
+      <p>
+        Mi enfoque no es solo técnico: tomo decisiones de diseño considerando impacto en disponibilidad,
+        seguridad y operativa. Trabajo cómodo tanto en la capa de infraestructura como en la definición
+        de controles y análisis de riesgos.
+      </p>
+    </div>
+ 
+    <div class="info-cards stagger">
+ 
+      <div class="info-card">
+        <div class="icon-wrap icon-wrap-cyan" aria-hidden="true">
+          <!-- Building / Company icon -->
+          <svg class="icon" viewBox="0 0 24 24"><path d="M3 21h18M3 7l9-4 9 4M4 7v14M20 7v14M9 21V15h6v6M9 9h.01M15 9h.01M9 13h.01M15 13h.01"/></svg>
+        </div>
+        <div>
+          <div class="ic-title">Empresa actual</div>
+          <div class="ic-sub">ACORDE Technologies<br>Network &amp; Systems Engineer</div>
+        </div>
+      </div>
+ 
+      <div class="info-card">
+        <div class="icon-wrap icon-wrap-cyan" aria-hidden="true">
+          <!-- Graduation cap -->
+          <svg class="icon" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5"/><path d="M6 12v5c3.33 3 8.67 3 12 0v-5"/></svg>
+        </div>
+        <div>
+          <div class="ic-title">Formación académica</div>
+          <div class="ic-sub">Ing. Informática (Redes y Sistemas) · UPSA<br>Máster en Seguridad TIC · U. Europea Madrid</div>
+        </div>
+      </div>
+ 
+      <div class="info-card">
+        <div class="icon-wrap icon-wrap-cyan" aria-hidden="true">
+          <!-- Shield check -->
+          <svg class="icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        </div>
+        <div>
+          <div class="ic-title">Certificación</div>
+          <div class="ic-sub">Auditor Interno ISO/IEC 27001</div>
+        </div>
+      </div>
+ 
+      <div class="info-card">
+        <div class="icon-wrap icon-wrap-cyan" aria-hidden="true">
+          <!-- Target / crosshair -->
+          <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+        </div>
+        <div>
+          <div class="ic-title">Objetivo profesional</div>
+          <div class="ic-sub">Ciberseguridad · GRC · Consultoría IT<br>Big Four / Grandes empresas</div>
+        </div>
+      </div>
+ 
+      <div class="info-card">
+        <div class="icon-wrap icon-wrap-cyan" aria-hidden="true">
+          <!-- Map pin -->
+          <svg class="icon" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div>
+          <div class="ic-title">Ubicación</div>
+          <div class="ic-sub">España · Disponible para reubicación</div>
+        </div>
+      </div>
+ 
+    </div>
+  </div>
+</section>
+ 
+<div class="divider"></div>
+ 
+<!-- ════════ SKILLS ════════ -->
+<section id="skills" class="section" aria-labelledby="skills-h">
+  <div class="reveal">
+    <div class="eye">02 — Competencias</div>
+    <h2 class="sh" id="skills-h">Stack técnico</h2>
+    <p class="ssub">
+      Tecnologías agrupadas por dominio. No es una lista de palabras clave —
+      es lo que uso en producción.
+    </p>
+  </div>
+ 
+  <div class="skills-grid stagger">
+ 
+    <div class="skill-card">
+      <div class="sk-head" aria-hidden="true">
+        <!-- Globe / network -->
+        <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span class="sk-title">Network &amp; Infrastructure</span>
+      </div>
+      <div class="tags" role="list" aria-label="Tecnologías de red">
+        <span class="tag hi" role="listitem">MikroTik RouterOS</span>
+        <span class="tag hi" role="listitem">VLANs</span>
+        <span class="tag hi" role="listitem">VRRP / HA</span>
+        <span class="tag" role="listitem">Cisco IOS</span>
+        <span class="tag" role="listitem">D-Link</span>
+        <span class="tag" role="listitem">TP-Link</span>
+        <span class="tag" role="listitem">Zyxel</span>
+        <span class="tag" role="listitem">Routing &amp; Switching</span>
+        <span class="tag" role="listitem">OSPF</span>
+        <span class="tag" role="listitem">Alta Disponibilidad</span>
+      </div>
+    </div>
+ 
+    <div class="skill-card">
+      <div class="sk-head" aria-hidden="true">
+        <!-- Lock / shield -->
+        <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <span class="sk-title">Seguridad</span>
+      </div>
+      <div class="tags" role="list" aria-label="Tecnologías de seguridad">
+        <span class="tag amber" role="listitem">ISO/IEC 27001</span>
+        <span class="tag hi" role="listitem">WatchGuard</span>
+        <span class="tag hi" role="listitem">Wazuh</span>
+        <span class="tag hi" role="listitem">CrowdSec</span>
+        <span class="tag" role="listitem">Hacking Ético</span>
+        <span class="tag" role="listitem">Análisis de riesgos</span>
+        <span class="tag" role="listitem">Segmentación de red</span>
+        <span class="tag" role="listitem">Gestión de activos</span>
+        <span class="tag" role="listitem">Firewall policies</span>
+      </div>
+    </div>
+ 
+    <div class="skill-card">
+      <div class="sk-head" aria-hidden="true">
+        <!-- Server / cpu -->
+        <svg class="icon" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><path d="M6 6h.01M6 18h.01"/></svg>
+        <span class="sk-title">Sistemas &amp; Virtualización</span>
+      </div>
+      <div class="tags" role="list" aria-label="Tecnologías de sistemas">
+        <span class="tag hi" role="listitem">Proxmox</span>
+        <span class="tag hi" role="listitem">Linux Debian</span>
+        <span class="tag" role="listitem">VMs</span>
+        <span class="tag" role="listitem">SQL</span>
+        <span class="tag" role="listitem">Servidores</span>
+        <span class="tag" role="listitem">Administración de sistemas</span>
+      </div>
+    </div>
+ 
+    <div class="skill-card">
+      <div class="sk-head" aria-hidden="true">
+        <!-- Bar chart -->
+        <svg class="icon" viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+        <span class="sk-title">Monitorización &amp; Observabilidad</span>
+      </div>
+      <div class="tags" role="list" aria-label="Tecnologías de monitorización">
+        <span class="tag hi" role="listitem">Grafana</span>
+        <span class="tag hi" role="listitem">InfluxDB</span>
+        <span class="tag" role="listitem">ThingsBoard</span>
+        <span class="tag" role="listitem">Telegraf</span>
+        <span class="tag" role="listitem">Alertas en tiempo real</span>
+        <span class="tag" role="listitem">IoT Monitoring</span>
+        <span class="tag" role="listitem">SNMP</span>
+      </div>
+    </div>
+ 
+    <div class="skill-card">
+      <div class="sk-head" aria-hidden="true">
+        <!-- Code brackets -->
+        <svg class="icon" viewBox="0 0 24 24"><path d="M17 7 22 12 17 17M7 17 2 12 7 7"/></svg>
+        <span class="sk-title">Desarrollo &amp; Automatización</span>
+      </div>
+      <div class="tags" role="list" aria-label="Tecnologías de desarrollo">
+        <span class="tag hi" role="listitem">FastAPI</span>
+        <span class="tag hi" role="listitem">Vue.js</span>
+        <span class="tag" role="listitem">Python</span>
+        <span class="tag" role="listitem">REST APIs</span>
+        <span class="tag" role="listitem">Scripts RouterOS</span>
+        <span class="tag" role="listitem">Automatización</span>
+        <span class="tag" role="listitem">Claude Code</span>
+      </div>
+    </div>
+ 
+  </div>
+</section>
+ 
+<div class="divider"></div>
+ 
+<!-- ════════ ARQUITECTURAS ════════ -->
+<section id="arquitecturas" class="section" aria-labelledby="arch-h">
+  <div class="reveal">
+    <div class="eye">03 — Arquitecturas</div>
+    <h2 class="sh" id="arch-h">Diseños de referencia</h2>
+    <p class="ssub">
+      Patrones de arquitectura que aplico en producción. No son conceptos teóricos —
+      son decisiones de diseño con consecuencias operativas reales.
+    </p>
+  </div>
+ 
+  <div class="arch-grid stagger">
+ 
+    <!-- Card 1 -->
+    <div class="arch-card">
+      <div class="arch-head">
+        <div class="arch-num">Arquitectura 01</div>
+        <div class="arch-title">Red de Alta Disponibilidad con VRRP</div>
+        <div class="arch-ctx">Infraestructura corporativa sin punto único de fallo</div>
+      </div>
+      <!-- Diagram -->
+      <div style="padding:.9rem 1.25rem .5rem; border-bottom:1px solid var(--b0);">
+        <svg viewBox="0 0 300 192" xmlns=http://www.w3.org/2000/svg style="width:100%;height:auto;display:block;" aria-label="Diagrama VRRP y VLAN" role="img">
+          <defs>
+            <marker id="a1" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0,6 2.5,0 5" fill="#475569"/></marker>
+          </defs>
+          <!-- Router A -->
+          <rect x="6" y="8" width="108" height="40" rx="2" fill="#080d1a" stroke="#22d3ee" stroke-width="1"/>
+          <text x="60" y="25" font-family="monospace,monospace" font-size="8.5" fill="#22d3ee" text-anchor="middle" font-weight="600">MikroTik A</text>
+          <text x="60" y="39" font-family="monospace,monospace" font-size="7" fill="#94a3b8" text-anchor="middle">Primary · MASTER</text>
+          <!-- Router B -->
+          <rect x="186" y="8" width="108" height="40" rx="2" fill="#080d1a" stroke="#475569" stroke-width="1" stroke-dasharray="3,2"/>
+          <text x="240" y="25" font-family="monospace,monospace" font-size="8.5" fill="#94a3b8" text-anchor="middle" font-weight="600">MikroTik B</text>
+          <text x="240" y="39" font-family="monospace,monospace" font-size="7" fill="#475569" text-anchor="middle">Backup · SLAVE</text>
+          <!-- VRRP line -->
+          <line x1="114" y1="28" x2="186" y2="28" stroke="#f59e0b" stroke-width="1" stroke-dasharray="4,3"/>
+          <rect x="124" y="18" width="52" height="14" rx="2" fill="rgba(245,158,11,.12)"/>
+          <text x="150" y="28.5" font-family="monospace,monospace" font-size="7" fill="#f59e0b" text-anchor="middle">VRRP · VIP</text>
+          <!-- Lines to switch -->
+          <line x1="60" y1="48" x2="125" y2="94" stroke="#475569" stroke-width="1" marker-end="url(#a1)"/>
+          <line x1="240" y1="48" x2="175" y2="94" stroke="#475569" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#a1)"/>
+          <!-- Switch -->
+          <rect x="85" y="94" width="130" height="30" rx="2" fill="#080d1a" stroke="#475569" stroke-width="1"/>
+          <text x="150" y="109" font-family="monospace,monospace" font-size="8" fill="#94a3b8" text-anchor="middle">Core Switch</text>
+          <text x="150" y="119" font-family="monospace,monospace" font-size="6.5" fill="#2a3a50" text-anchor="middle">802.1Q Trunk</text>
+          <!-- Lines to VLANs -->
+          <line x1="115" y1="124" x2="52" y2="155" stroke="#475569" stroke-width="1" marker-end="url(#a1)"/>
+          <line x1="150" y1="124" x2="150" y2="155" stroke="#475569" stroke-width="1" marker-end="url(#a1)"/>
+          <line x1="185" y1="124" x2="248" y2="155" stroke="#475569" stroke-width="1" marker-end="url(#a1)"/>
+          <!-- VLAN boxes -->
+          <rect x="6" y="155" width="88" height="32" rx="2" fill="#080d1a" stroke="#22d3ee" stroke-width="1" opacity=".7"/>
+          <text x="50" y="168" font-family="monospace,monospace" font-size="7.5" fill="#22d3ee" text-anchor="middle">VLAN 10</text>
+          <text x="50" y="180" font-family="monospace,monospace" font-size="7" fill="#94a3b8" text-anchor="middle">Usuarios</text>
+          <rect x="106" y="155" width="88" height="32" rx="2" fill="#080d1a" stroke="#22d3ee" stroke-width="1" opacity=".7"/>
+          <text x="150" y="168" font-family="monospace,monospace" font-size="7.5" fill="#22d3ee" text-anchor="middle">VLAN 20</text>
+          <text x="150" y="180" font-family="monospace,monospace" font-size="7" fill="#94a3b8" text-anchor="middle">Servidores</text>
+          <rect x="206" y="155" width="88" height="32" rx="2" fill="#080d1a" stroke="#22d3ee" stroke-width="1" opacity=".7"/>
+          <text x="250" y="168" font-family="monospace,monospace" font-size="7.5" fill="#22d3ee" text-anchor="middle">VLAN 30</text>
+          <text x="250" y="180" font-family="monospace,monospace" font-size="7" fill="#94a3b8" text-anchor="middle">Administración</text>
+        </svg>
+      </div>
+      <div class="arch-body">
+        <div class="arch-block">
+          <div class="arch-block-lbl">Diseño</div>
+          <ul class="arch-list">
+            <li>VRRP para redundancia automática de gateway</li>
+            <li>Segmentación estricta mediante VLANs por segmento funcional</li>
+            <li>Failover automático sin impacto al usuario final</li>
+            <li>Monitorización activa del estado del enlace</li>
+          </ul>
+        </div>
+        <div class="arch-block">
+          <div class="arch-block-lbl">Trade-offs</div>
+          <ul class="arch-list">
+            <li>Complejidad operativa vs resiliencia</li>
+            <li>Necesidad de monitorización activa</li>
+          </ul>
+        </div>
+      </div>
+      <div class="arch-value">
+        <div class="arch-value-lbl">Impacto</div>
+        <div class="arch-value-txt">Continuidad de negocio garantizada y resiliencia ante fallos de capa 3.</div>
+        <div class="arch-value-txt" style="margin-top:.4rem;color:var(--t3);">Implementado en entornos reales donde la caída de servicio tiene impacto directo en la operativa.</div>
+      </div>
+    </div>
+ 
+    <!-- Card 2 -->
+    <div class="arch-card">
+      <div class="arch-head">
+        <div class="arch-num">Arquitectura 02</div>
+        <div class="arch-title">Stack de Monitorización Integral</div>
+        <div class="arch-ctx">Visibilidad completa de la infraestructura en tiempo real</div>
+      </div>
+      <!-- Diagram -->
+      <div style="padding:.9rem 1.25rem .5rem; border-bottom:1px solid var(--b0);">
+        <svg viewBox="0 0 300 162" xmlns=http://www.w3.org/2000/svg style="width:100%;height:auto;display:block;" aria-label="Diagrama Stack de Monitorización" role="img">
+          <defs>
+            <marker id="a2" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0,6 2.5,0 5" fill="#475569"/></marker>
+          </defs>
+          <!-- Source devices row -->
+          <rect x="6" y="8" width="66" height="28" rx="2" fill="#080d1a" stroke="#475569" stroke-width="1"/>
+          <text x="39" y="21" font-family="monospace,monospace" font-size="7.5" fill="#94a3b8" text-anchor="middle">Network</text>
+          <text x="39" y="31" font-family="monospace,monospace" font-size="7.5" fill="#94a3b8" text-anchor="middle">Devices</text>
+          <rect x="82" y="8" width="66" height="28" rx="2" fill="#080d1a" stroke="#475569" stroke-width="1"/>
+          <text x="115" y="21" font-family="monospace,monospace" font-size="7.5" fill="#94a3b8" text-anchor="middle">Linux</text>
+          <text x="115" y="31" font-family="monospace,monospace" font-size="7.5" fill="#94a3b8" text-anchor="middle">Servers</text>
+          <rect x="158" y="8" width="66" height="28" rx="2" fill="#080d1a" stroke="#475569" stroke-width="1"/>
+          <text x="191" y="21" font-family="monospace,monospace" font-size="7.5" fill="#94a3b8" text-anchor="middle">IoT /</text>
+          <text x="191" y="31" font-family="monospace,monospace" font-size="7.5" fill="#94a3b8" text-anchor="middle">Sensors</text>
+          <!-- Lines to Telegraf -->
+          <line x1="39" y1="36" x2="130" y2="62" stroke="#475569" stroke-width="1" marker-end="url(#a2)"/>
+          <line x1="115" y1="36" x2="140" y2="62" stroke="#475569" stroke-width="1" marker-end="url(#a2)"/>
+          <line x1="191" y1="36" x2="155" y2="62" stroke="#475569" stroke-width="1" marker-end="url(#a2)"/>
+          <!-- Telegraf -->
+          <rect x="86" y="62" width="128" height="28" rx="2" fill="#080d1a" stroke="#22d3ee" stroke-width="1"/>
+          <text x="150" y="76" font-family="monospace,monospace" font-size="8" fill="#22d3ee" text-anchor="middle" font-weight="600">Telegraf</text>
+          <text x="150" y="86" font-family="monospace,monospace" font-size="6.5" fill="#475569" text-anchor="middle">SNMP · syslog · metrics</text>
+          <!-- Telegraf → InfluxDB -->
+          <line x1="150" y1="90" x2="150" y2="104" stroke="#475569" stroke-width="1" marker-end="url(#a2)"/>
+          <!-- InfluxDB -->
+          <rect x="86" y="104" width="128" height="24" rx="2" fill="#080d1a" stroke="#22d3ee" stroke-width="1"/>
+          <text x="150" y="120" font-family="monospace,monospace" font-size="8" fill="#22d3ee" text-anchor="middle" font-weight="600">InfluxDB · Time-series</text>
+          <!-- InfluxDB → Grafana -->
+          <line x1="150" y1="128" x2="150" y2="138" stroke="#475569" stroke-width="1" marker-end="url(#a2)"/>
+          <!-- Grafana + Alerts row -->
+          <rect x="86" y="138" width="80" height="18" rx="2" fill="#080d1a" stroke="#22d3ee" stroke-width="1"/>
+          <text x="126" y="150" font-family="monospace,monospace" font-size="7.5" fill="#22d3ee" text-anchor="middle">Grafana</text>
+          <line x1="166" y1="147" x2="178" y2="147" stroke="#475569" stroke-width="1" marker-end="url(#a2)"/>
+          <rect x="178" y="138" width="36" height="18" rx="2" fill="rgba(245,158,11,.15)" stroke="#f59e0b" stroke-width="1"/>
+          <text x="196" y="150" font-family="monospace,monospace" font-size="7" fill="#f59e0b" text-anchor="middle">Alerts</text>
+        </svg>
+      </div>
+      <div class="arch-body">
+        <div class="arch-block">
+          <div class="arch-block-lbl">Componentes</div>
+          <ul class="arch-list">
+            <li>Grafana como capa de visualización y alertas</li>
+            <li>InfluxDB como base de datos de series temporales</li>
+            <li>Telegraf para recolección de métricas (SNMP, sistema, red)</li>
+            <li>Alertas multichannel con umbrales configurables</li>
+          </ul>
+        </div>
+        <div class="arch-block">
+          <div class="arch-block-lbl">Trade-offs</div>
+          <ul class="arch-list">
+            <li>Complejidad operativa vs resiliencia</li>
+            <li>Necesidad de monitorización activa</li>
+          </ul>
+        </div>
+      </div>
+      <div class="arch-value">
+        <div class="arch-value-lbl">Impacto</div>
+        <div class="arch-value-txt">Detección proactiva de incidencias antes de que impacten al servicio.</div>
+        <div class="arch-value-txt" style="margin-top:.4rem;color:var(--t3);">Implementado en entornos reales donde la caída de servicio tiene impacto directo en la operativa.</div>
+      </div>
+    </div>
+ 
+    <!-- Card 3 -->
+    <div class="arch-card">
+      <div class="arch-head">
+        <div class="arch-num">Arquitectura 03</div>
+        <div class="arch-title">Pipeline de Automatización MikroTik</div>
+        <div class="arch-ctx">Provisioning estandarizado y reproducible</div>
+      </div>
+      <!-- Diagram -->
+      <div style="padding:.9rem 1.25rem .5rem; border-bottom:1px solid var(--b0);">
+        <svg viewBox="0 0 300 158" xmlns=http://www.w3.org/2000/svg style="width:100%;height:auto;display:block;" aria-label="Diagrama Pipeline Automatización MikroTik" role="img">
+          <defs>
+            <marker id="a3r" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0,6 2.5,0 5" fill="#475569"/></marker>
+            <marker id="a3l" markerWidth="6" markerHeight="5" refX="1" refY="2.5" orient="auto"><polygon points="6 0,0 2.5,6 5" fill="#22d3ee"/></marker>
+          </defs>
+          <!-- Row 1: User → Vue → FastAPI -->
+          <rect x="6" y="10" width="72" height="28" rx="2" fill="#080d1a" stroke="#475569" stroke-width="1"/>
+          <text x="42" y="23" font-family="monospace,monospace" font-size="8" fill="#94a3b8" text-anchor="middle">Operador</text>
+          <text x="42" y="33" font-family="monospace,monospace" font-size="7" fill="#475569" text-anchor="middle">input JSON</text>
+          <line x1="78" y1="24" x2="92" y2="24" stroke="#475569" stroke-width="1" marker-end="url(#a3r)"/>
+          <rect x="92" y="10" width="72" height="28" rx="2" fill="#080d1a" stroke="#22d3ee" stroke-width="1"/>
+          <text x="128" y="23" font-family="monospace,monospace" font-size="8" fill="#22d3ee" text-anchor="middle" font-weight="600">Vue.js</text>
+          <text x="128" y="33" font-family="monospace,monospace" font-size="7" fill="#475569" text-anchor="middle">Frontend</text>
+          <line x1="164" y1="24" x2="178" y2="24" stroke="#475569" stroke-width="1" marker-end="url(#a3r)"/>
+          <rect x="178" y="10" width="116" height="28" rx="2" fill="#080d1a" stroke="#22d3ee" stroke-width="1"/>
+          <text x="236" y="23" font-family="monospace,monospace" font-size="8" fill="#22d3ee" text-anchor="middle" font-weight="600">FastAPI</text>
+          <text x="236" y="33" font-family="monospace,monospace" font-size="7" fill="#475569" text-anchor="middle">REST Backend</text>
+          <!-- Vertical connector right side -->
+          <line x1="236" y1="38" x2="236" y2="58" stroke="#475569" stroke-width="1" marker-end="url(#a3r)"/>
+          <!-- Row 2 right: Jinja2 -->
+          <rect x="178" y="58" width="116" height="28" rx="2" fill="#080d1a" stroke="#22d3ee" stroke-width="1"/>
+          <text x="236" y="71" font-family="monospace,monospace" font-size="8" fill="#22d3ee" text-anchor="middle" font-weight="600">Jinja2</text>
+          <text x="236" y="81" font-family="monospace,monospace" font-size="7" fill="#475569" text-anchor="middle">Template Engine</text>
+          <!-- Jinja2 → .rsc -->
+          <line x1="178" y1="72" x2="164" y2="72" stroke="#475569" stroke-width="1" marker-end="url(#a3l)"/>
+          <rect x="92" y="58" width="72" height="28" rx="2" fill="rgba(34,211,238,.08)" stroke="#22d3ee" stroke-width="1"/>
+          <text x="128" y="71" font-family="monospace,monospace" font-size="8.5" fill="#22d3ee" text-anchor="middle" font-weight="600">.rsc</text>
+          <text x="128" y="81" font-family="monospace,monospace" font-size="7" fill="#475569" text-anchor="middle">RouterOS cfg</text>
+          <!-- .rsc → MikroTik -->
+          <line x1="92" y1="72" x2="78" y2="72" stroke="#475569" stroke-width="1" marker-end="url(#a3l)"/>
+          <rect x="6" y="58" width="72" height="28" rx="2" fill="#080d1a" stroke="#22d3ee" stroke-width="1"/>
+          <text x="42" y="71" font-family="monospace,monospace" font-size="8" fill="#22d3ee" text-anchor="middle" font-weight="600">MikroTik</text>
+          <text x="42" y="81" font-family="monospace,monospace" font-size="7" fill="#475569" text-anchor="middle">RouterOS</text>
+          <!-- Impact row -->
+          <rect x="6" y="110" width="288" height="38" rx="2" fill="rgba(34,211,238,.05)" stroke="rgba(34,211,238,.2)" stroke-width="1"/>
+          <text x="150" y="125" font-family="monospace,monospace" font-size="7" fill="#22d3ee" text-anchor="middle">horas → minutos · consistente · reproducible · sin CLI</text>
+          <text x="150" y="141" font-family="monospace,monospace" font-size="6.5" fill="#475569" text-anchor="middle">configuraciones idénticas en cada despliegue</text>
+        </svg>
+      </div>
+      <div class="arch-body">
+        <div class="arch-block">
+          <div class="arch-block-lbl">Diseño</div>
+          <ul class="arch-list">
+            <li>Input estructurado en JSON con parámetros de red</li>
+            <li>Backend FastAPI como motor de generación</li>
+            <li>Generación dinámica de ficheros <code style="font-family:var(--fm);font-size:.85em;color:var(--cyan)">.rsc</code> para RouterOS</li>
+            <li>Frontend Vue.js para operadores sin conocimiento avanzado de CLI</li>
+          </ul>
+        </div>
+        <div class="arch-block">
+          <div class="arch-block-lbl">Trade-offs</div>
+          <ul class="arch-list">
+            <li>Complejidad operativa vs resiliencia</li>
+            <li>Necesidad de monitorización activa</li>
+          </ul>
+        </div>
+      </div>
+      <div class="arch-value">
+        <div class="arch-value-lbl">Impacto</div>
+        <div class="arch-value-txt">Despliegues reproducibles, reducción de errores y estandarización operativa.</div>
+        <div class="arch-value-txt" style="margin-top:.4rem;color:var(--t3);">Implementado en entornos reales donde la caída de servicio tiene impacto directo en la operativa.</div>
+      </div>
+    </div>
+ 
+  </div>
+</section>
+ 
+<div class="divider"></div>
+ 
+<!-- ════════ PROJECTS ════════ -->
+<section id="projects" class="section" aria-labelledby="proj-h">
+  <div class="reveal">
+    <div class="eye">04 — Proyectos</div>
+    <h2 class="sh" id="proj-h">Proyectos destacados</h2>
+    <p class="ssub">
+      Trabajo aplicado en entornos reales y de investigación.
+      Cada proyecto resuelve un problema concreto con tecnología concreta.
+    </p>
+  </div>
+ 
+  <div class="projects-grid stagger">
+ 
+    <!-- FEATURED -->
+    <article class="proj-card wide" aria-labelledby="proj1-title">
+      <div class="proj-head">
+        <div>
+          <div class="proj-type">Desarrollo · Herramienta interna</div>
+          <h3 class="proj-title" id="proj1-title">Generador de Configuraciones MikroTik</h3>
+        </div>
+        <div class="proj-icon" aria-hidden="true">
+          <!-- Tool / wrench -->
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+      </div>
+      <div class="proj-body">
+        <div>
+          <div class="proj-lbl">Problema</div>
+          <div class="proj-txt">La configuración manual de dispositivos MikroTik en despliegues recurrentes consumía tiempo
+            significativo, generaba inconsistencias entre instalaciones y dependía del conocimiento individual de cada técnico.</div>
+        </div>
+        <div>
+          <div class="proj-lbl">Solución</div>
+          <div class="proj-txt">Aplicación web que, a partir de parámetros de red (VLANs, interfaces, rutas, políticas),
+            genera ficheros <code>.rsc</code> listos para importar directamente en RouterOS.</div>
+        </div>
+        <div>
+          <div class="proj-lbl">Impacto</div>
+          <div class="proj-txt">Reduce el tiempo de provisioning de varias horas a minutos,
+            eliminando errores manuales en configuraciones críticas y permitiendo despliegues consistentes en entornos productivos.</div>
+        </div>
+        <div>
+          <div class="proj-lbl">Arquitectura</div>
+          <div class="proj-txt">FastAPI + Jinja2 + Vue.js con generación dinámica de configuraciones RouterOS.</div>
+        </div>
+        <div>
+          <div class="proj-lbl">Valor profesional</div>
+          <div class="proj-txt">Demuestra capacidad para identificar cuellos de botella operativos y resolverlos con
+            desarrollo de software. Combina conocimiento profundo de RouterOS con habilidades fullstack.</div>
+          <div style="margin-top:1rem; display:flex; gap:.5rem; flex-wrap:wrap;">
+            <a href="#" class="btn btn-ghost">Ver código</a>
+            <a href="#" class="btn btn-ghost">Arquitectura</a>
+          </div>
+        </div>
+      </div>
+      <div class="proj-foot">
+        <span class="tech">FastAPI</span>
+        <span class="tech">Vue.js</span>
+        <span class="tech">Python</span>
+        <span class="tech">MikroTik RouterOS</span>
+        <span class="tech">REST API</span>
+        <span class="tech">.rsc generation</span>
+      </div>
+    </article>
+ 
+    <article class="proj-card" aria-labelledby="proj2-title">
+      <div class="proj-head">
+        <div>
+          <div class="proj-type">Infraestructura · Redes</div>
+          <h3 class="proj-title" id="proj2-title">Infraestructura de Red con Alta Disponibilidad</h3>
+        </div>
+        <div class="proj-icon" aria-hidden="true">
+          <!-- GitBranch / network -->
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7M6 9v12"/></svg>
+        </div>
+      </div>
+      <div class="proj-body">
+        <div>
+          <div class="proj-lbl">Problema</div>
+          <div class="proj-txt">Entornos corporativos con requisito de tolerancia a fallos, sin puntos únicos de fallo
+            y con segmentación estricta por segmento funcional.</div>
+        </div>
+        <div>
+          <div class="proj-lbl">Solución</div>
+          <div class="proj-txt">Arquitecturas MikroTik con VLANs por departamento, VRRP para failover automático
+            de gateway y alta disponibilidad con conmutación transparente para el usuario final.</div>
+        </div>
+      </div>
+      <div class="proj-foot">
+        <span class="tech">MikroTik</span><span class="tech">VLANs</span>
+        <span class="tech">VRRP</span><span class="tech">HA</span><span class="tech">Switching</span>
+      </div>
+    </article>
+ 
+    <article class="proj-card" aria-labelledby="proj3-title">
+      <div class="proj-head">
+        <div>
+          <div class="proj-type">Monitorización · Observabilidad</div>
+          <h3 class="proj-title" id="proj3-title">Stack Grafana + InfluxDB</h3>
+        </div>
+        <div class="proj-icon" aria-hidden="true">
+          <!-- Trending up -->
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></svg>
+        </div>
+      </div>
+      <div class="proj-body">
+        <div>
+          <div class="proj-lbl">Problema</div>
+          <div class="proj-txt">Falta de visibilidad en tiempo real: uso de interfaces, latencias y detección
+            proactiva de degradación antes de que impacte al usuario.</div>
+        </div>
+        <div>
+          <div class="proj-lbl">Solución</div>
+          <div class="proj-txt">Stack completo con InfluxDB como time-series DB, agentes Telegraf y dashboards
+            Grafana con sistema de alertas multichannel configurado.</div>
+        </div>
+      </div>
+      <div class="proj-foot">
+        <span class="tech">Grafana</span><span class="tech">InfluxDB</span>
+        <span class="tech">Telegraf</span><span class="tech">Alerting</span><span class="tech">SNMP</span>
+      </div>
+    </article>
+ 
+    <article class="proj-card" aria-labelledby="proj-netdash-title">
+      <div class="proj-head">
+        <div>
+          <div class="proj-type">Monitorización · Infraestructura de Red</div>
+          <h3 class="proj-title" id="proj-netdash-title">Network Dashboard — Stack Prometheus</h3>
+        </div>
+        <div class="proj-icon" aria-hidden="true">
+          <!-- Network / monitor -->
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M6 8h.01M9 8h6"/></svg>
+        </div>
+      </div>
+      <div class="proj-body">
+        <div>
+          <div class="proj-lbl">Problema</div>
+          <div class="proj-txt">Infraestructura distribuida en múltiples plantas sin visibilidad centralizada: caídas de dispositivos detectadas tarde, sin historial de disponibilidad ni mecanismo de alerta proactivo.</div>
+        </div>
+        <div>
+          <div class="proj-lbl">Solución</div>
+          <div class="proj-txt">Stack dockerizado con Prometheus + Blackbox Exporter (ICMP) + SNMP Exporter (IF-MIB) + Alertmanager + Grafana. Monitoriza disponibilidad y métricas de interfaz de red en tiempo real con alertas automáticas ante caídas o latencia elevada. Despliegue reproducible con <code>docker compose up</code>.</div>
+        </div>
+        <div>
+          <div class="proj-lbl">Valor profesional</div>
+          <div class="proj-txt">Demuestra capacidad para diseñar observabilidad de red end-to-end: desde la recogida de métricas hasta la notificación de incidencias, con infraestructura como código y sin dependencia de soluciones SaaS.</div>
+        </div>
+      </div>
+      <div class="proj-foot">
+        <span class="tech">Prometheus</span><span class="tech">Grafana</span>
+        <span class="tech">Blackbox Exporter</span><span class="tech">SNMP</span>
+        <span class="tech">Alertmanager</span><span class="tech">Docker Compose</span>
+      </div>
+    </article>
+ 
+    <article class="proj-card" aria-labelledby="proj4-title">
+      <div class="proj-head">
+        <div>
+          <div class="proj-type">Seguridad · IDS/IPS colaborativo</div>
+          <h3 class="proj-title" id="proj4-title">Detección de Amenazas con CrowdSec</h3>
+        </div>
+        <div class="proj-icon" aria-hidden="true">
+          <!-- Shield alert -->
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v4M12 16h.01"/></svg>
+        </div>
+      </div>
+      <div class="proj-body">
+        <div>
+          <div class="proj-lbl">Problema</div>
+          <div class="proj-txt">Necesidad de detectar y bloquear comportamientos maliciosos (brute force, scanning)
+            de forma automática y sin intervención manual constante.</div>
+        </div>
+        <div>
+          <div class="proj-lbl">Solución</div>
+          <div class="proj-txt">CrowdSec en infraestructura Linux con análisis de logs en tiempo real, bouncers activos
+            y compartición de threat intelligence con la red colaborativa global.</div>
+        </div>
+      </div>
+      <div class="proj-foot">
+        <span class="tech">CrowdSec</span><span class="tech">Linux</span>
+        <span class="tech">Log analysis</span><span class="tech">IDS/IPS</span>
+      </div>
+    </article>
+ 
+    <article class="proj-card" aria-labelledby="proj5-title">
+      <div class="proj-head">
+        <div>
+          <div class="proj-type">TFG · Investigación aplicada</div>
+          <h3 class="proj-title" id="proj5-title">Sistema de Monitorización de Calidad del Aire</h3>
+        </div>
+        <div class="proj-icon" aria-hidden="true">
+          <!-- Activity / wave -->
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+      </div>
+      <div class="proj-body">
+        <div>
+          <div class="proj-lbl">Contexto</div>
+          <div class="proj-txt">TFG — Ing. Informática (Redes y Sistemas), Universidad Pontificia de Salamanca.</div>
+        </div>
+        <div>
+          <div class="proj-lbl">Solución</div>
+          <div class="proj-txt">Plataforma IoT distribuida para medición de CO₂, partículas, temperatura y humedad,
+            con almacenamiento de series temporales y visualización en ThingsBoard.</div>
+        </div>
+      </div>
+      <div class="proj-foot">
+        <span class="tech">IoT</span><span class="tech">ThingsBoard</span>
+        <span class="tech">MQTT</span><span class="tech">Series temporales</span>
+      </div>
+    </article>
+ 
+    <article class="proj-card" aria-labelledby="proj6-title">
+      <div class="proj-head">
+        <div>
+          <div class="proj-type">TFM · Seguridad avanzada</div>
+          <h3 class="proj-title" id="proj6-title">Securización de Edificios Inteligentes</h3>
+        </div>
+        <div class="proj-icon" aria-hidden="true">
+          <!-- Building secure -->
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M3 7l9-4 9 4M4 7v14M20 7v14M9 21v-6h6v6"/><path d="m14 10-2 2-2-2"/></svg>
+        </div>
+      </div>
+      <div class="proj-body">
+        <div>
+          <div class="proj-lbl">Contexto</div>
+          <div class="proj-txt">TFM — Seguridad de las TIC, Universidad Europea de Madrid.</div>
+        </div>
+        <div>
+          <div class="proj-lbl">Solución</div>
+          <div class="proj-txt">Análisis de superficie de ataque en BMS/BAS, modelado de amenazas e implementación
+            de controles ISO/IEC 27001 para entornos OT/IoT.</div>
+        </div>
+      </div>
+      <div class="proj-foot">
+        <span class="tech">ISO 27001</span><span class="tech">OT Security</span>
+        <span class="tech">Threat modeling</span><span class="tech">BMS/BAS</span><span class="tech">GRC</span>
+      </div>
+    </article>
+ 
+    <!-- Security Lab — wide featured card -->
+    <article class="proj-card wide" aria-labelledby="proj-lab-title">
+      <div class="proj-head">
+        <div>
+          <div class="proj-type">Blue Team · Laboratorio · Detección y Respuesta</div>
+          <h3 class="proj-title" id="proj-lab-title">Laboratorio de Detección y Respuesta (Blue Team)</h3>
+        </div>
+        <div class="proj-icon" aria-hidden="true">
+          <!-- Eye / radar -->
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+      </div>
+      <!-- Security Lab Architecture Diagram -->
+      <div style="padding:.9rem 1.6rem .5rem; border-bottom:1px solid var(--b0);">
+        <svg viewBox="0 0 580 130" xmlns=http://www.w3.org/2000/svg style="width:100%;height:auto;display:block;" aria-label="Diagrama arquitectura Security Lab" role="img">
+          <defs>
+            <marker id="a4r" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0,6 2.5,0 5" fill="#475569"/></marker>
+            <marker id="a4rd" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0,6 2.5,0 5" fill="#f59e0b"/></marker>
+            <marker id="a4g" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0,6 2.5,0 5" fill="#34d399"/></marker>
+          </defs>
+          <!-- Row 1: Attack path (top) -->
+          <!-- Attacker -->
+          <rect x="6" y="8" width="72" height="34" rx="2" fill="#080d1a" stroke="#f59e0b" stroke-width="1"/>
+          <text x="42" y="23" font-family="monospace,monospace" font-size="7.5" fill="#f59e0b" text-anchor="middle">Atacante</text>
+          <text x="42" y="35" font-family="monospace,monospace" font-size="6.5" fill="#475569" text-anchor="middle">externo</text>
+          <!-- Arrow to Firewall -->
+          <line x1="78" y1="25" x2="96" y2="25" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="3,2" marker-end="url(#a4rd)"/>
+          <!-- Firewall/CrowdSec -->
+          <rect x="96" y="8" width="96" height="34" rx="2" fill="#080d1a" stroke="#f59e0b" stroke-width="1"/>
+          <text x="144" y="22" font-family="monospace,monospace" font-size="7.5" fill="#f59e0b" text-anchor="middle">Firewall /</text>
+          <text x="144" y="32" font-family="monospace,monospace" font-size="7.5" fill="#f59e0b" text-anchor="middle">CrowdSec</text>
+          <text x="144" y="37" font-family="monospace,monospace" font-size="6" fill="#475569" text-anchor="middle">IPS colaborativo</text>
+          <!-- Arrow to Linux Target -->
+          <line x1="192" y1="25" x2="210" y2="25" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="3,2" marker-end="url(#a4rd)"/>
+          <!-- Linux Target -->
+          <rect x="210" y="8" width="88" height="34" rx="2" fill="#080d1a" stroke="#475569" stroke-width="1"/>
+          <text x="254" y="22" font-family="monospace,monospace" font-size="7.5" fill="#94a3b8" text-anchor="middle">Linux Target</text>
+          <text x="254" y="35" font-family="monospace,monospace" font-size="6.5" fill="#475569" text-anchor="middle">endpoint monitorizado</text>
+          <!-- Wazuh Agent on target -->
+          <rect x="314" y="10" width="70" height="30" rx="2" fill="rgba(34,211,238,.08)" stroke="#22d3ee" stroke-width="1"/>
+          <text x="349" y="23" font-family="monospace,monospace" font-size="7" fill="#22d3ee" text-anchor="middle">Wazuh</text>
+          <text x="349" y="34" font-family="monospace,monospace" font-size="7" fill="#22d3ee" text-anchor="middle">Agent</text>
+          <!-- Arrow Wazuh Agent → Wazuh Manager -->
+          <line x1="384" y1="25" x2="402" y2="25" stroke="#22d3ee" stroke-width="1" marker-end="url(#a4r)"/>
+          <!-- Wazuh Manager -->
+          <rect x="402" y="8" width="90" height="34" rx="2" fill="#080d1a" stroke="#22d3ee" stroke-width="1"/>
+          <text x="447" y="22" font-family="monospace,monospace" font-size="7.5" fill="#22d3ee" text-anchor="middle" font-weight="600">Wazuh</text>
+          <text x="447" y="32" font-family="monospace,monospace" font-size="7" fill="#22d3ee" text-anchor="middle">Manager · SIEM</text>
+          <text x="447" y="38" font-family="monospace,monospace" font-size="6" fill="#475569" text-anchor="middle">correlación</text>
+          <!-- Arrow Wazuh Manager → Elastic -->
+          <line x1="492" y1="25" x2="510" y2="25" stroke="#22d3ee" stroke-width="1" marker-end="url(#a4r)"/>
+          <!-- Elastic Stack -->
+          <rect x="510" y="8" width="64" height="34" rx="2" fill="#080d1a" stroke="#22d3ee" stroke-width="1"/>
+          <text x="542" y="22" font-family="monospace,monospace" font-size="7.5" fill="#22d3ee" text-anchor="middle">Elastic</text>
+          <text x="542" y="35" font-family="monospace,monospace" font-size="7" fill="#94a3b8" text-anchor="middle">indexado</text>
+          <!-- Row 2: Response (bottom) -->
+          <!-- Vertical: Wazuh Manager → Block Action -->
+          <line x1="447" y1="42" x2="447" y2="82" stroke="#34d399" stroke-width="1" marker-end="url(#a4g)"/>
+          <!-- Block Action -->
+          <rect x="400" y="82" width="94" height="30" rx="2" fill="rgba(52,211,153,.1)" stroke="#34d399" stroke-width="1"/>
+          <text x="447" y="96" font-family="monospace,monospace" font-size="7.5" fill="#34d399" text-anchor="middle" font-weight="600">Respuesta Auto.</text>
+          <text x="447" y="107" font-family="monospace,monospace" font-size="6.5" fill="#475569" text-anchor="middle">bloqueo IP · alerta</text>
+          <!-- Arrow back to CrowdSec (response path) -->
+          <line x1="400" y1="97" x2="200" y2="97" stroke="#34d399" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#a4g)"/>
+          <line x1="200" y1="97" x2="144" y2="42" stroke="#34d399" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#a4g)"/>
+          <!-- Label -->
+          <text x="270" y="111" font-family="monospace,monospace" font-size="6.5" fill="#34d399" text-anchor="middle">bloqueo automático propagado</text>
+        </svg>
+      </div>
+      <div class="proj-body" style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem;">
+        <div style="display:flex;flex-direction:column;gap:.9rem;">
+          <div>
+            <div class="proj-lbl">Problema</div>
+            <div class="proj-txt">Falta de visibilidad y capacidad de respuesta ante amenazas en entornos reales:
+              sin correlación de eventos, sin bloqueo automático, sin escenarios de prueba controlados.</div>
+          </div>
+          <div>
+            <div class="proj-lbl">Solución</div>
+            <div class="proj-txt">Diseño de un laboratorio completo que simula ataques reales y permite su detección,
+              correlación y mitigación automática. Arquitectura multi-capa con SIEM, IPS colaborativo y sistemas Linux monitorizados.</div>
+          </div>
+          <div>
+            <div class="proj-lbl">Qué demuestra</div>
+            <div class="proj-txt">Capacidad para diseñar e implementar entornos de seguridad completos, desde la
+              infraestructura hasta la respuesta ante incidentes. Visión de Blue Team real, no teórica.</div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:.9rem;">
+          <div>
+            <div class="proj-lbl">Arquitectura</div>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:.3rem;margin-top:.1rem;">
+              <li style="font-family:var(--fm);font-size:.72rem;color:var(--t2);display:flex;gap:.5rem;align-items:baseline"><span style="color:var(--bc)">—</span> Wazuh (SIEM) para correlación y alertas</li>
+              <li style="font-family:var(--fm);font-size:.72rem;color:var(--t2);display:flex;gap:.5rem;align-items:baseline"><span style="color:var(--bc)">—</span> Elastic Stack como backend de indexado</li>
+              <li style="font-family:var(--fm);font-size:.72rem;color:var(--t2);display:flex;gap:.5rem;align-items:baseline"><span style="color:var(--bc)">—</span> CrowdSec para bloqueo automático de IPs</li>
+              <li style="font-family:var(--fm);font-size:.72rem;color:var(--t2);display:flex;gap:.5rem;align-items:baseline"><span style="color:var(--bc)">—</span> Sistemas Linux monitorizados como endpoints</li>
+            </ul>
+          </div>
+          <div>
+            <div class="proj-lbl">Escenarios simulados</div>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:.3rem;margin-top:.1rem;">
+              <li style="font-family:var(--fm);font-size:.72rem;color:var(--t2);display:flex;gap:.5rem;align-items:baseline"><span style="color:var(--amber)">—</span> Ataques de fuerza bruta SSH</li>
+              <li style="font-family:var(--fm);font-size:.72rem;color:var(--t2);display:flex;gap:.5rem;align-items:baseline"><span style="color:var(--amber)">—</span> Escaneo de red (Nmap, Masscan)</li>
+              <li style="font-family:var(--fm);font-size:.72rem;color:var(--t2);display:flex;gap:.5rem;align-items:baseline"><span style="color:var(--amber)">—</span> Intentos de persistencia</li>
+            </ul>
+          </div>
+          <div>
+            <div class="proj-lbl">Impacto</div>
+            <div class="proj-txt">Detección en tiempo real, bloqueo automático de IPs maliciosas y correlación
+              de eventos de seguridad entre múltiples fuentes.</div>
+          </div>
+        </div>
+      </div>
+      <div class="proj-foot">
+        <span class="tech">Wazuh</span>
+        <span class="tech">Elastic Stack</span>
+        <span class="tech">CrowdSec</span>
+        <span class="tech">Linux</span>
+        <span class="tech">SIEM</span>
+        <span class="tech">IDS/IPS</span>
+        <span class="tech">Threat detection</span>
+        <span class="tech">Incident response</span>
+      </div>
+    </article>
+ 
+  </div>
+</section>
+ 
+<div class="divider"></div>
+ 
+<!-- ════════ EDUCATION ════════ -->
+<section id="education" class="section" aria-labelledby="edu-h">
+  <div class="reveal">
+    <div class="eye">05 — Formación</div>
+    <h2 class="sh" id="edu-h">Educación &amp; Certificaciones</h2>
+  </div>
+ 
+  <div class="edu-grid reveal">
+    <div>
+      <div class="block-label">Formación académica</div>
+      <div class="timeline">
+        <div class="tl-item active">
+          <div class="tl-date">2022 – 2023</div>
+          <div class="tl-title">Máster en Seguridad de las TIC</div>
+          <div class="tl-org">Universidad Europea de Madrid</div>
+          <div class="tl-desc">
+            Especialización en ciberseguridad, análisis de riesgos, normativa y compliance.
+            TFM: <em>Securización de Edificios Inteligentes</em> — modelado de amenazas en entornos OT/IoT
+            con propuesta de controles ISO 27001.
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">2018 – 2022</div>
+          <div class="tl-title">Grado en Ingeniería Informática</div>
+          <div class="tl-org">Mención Redes y Sistemas · Universidad Pontificia de Salamanca</div>
+          <div class="tl-desc">
+            Especialización en arquitectura de redes, sistemas operativos y programación.
+            TFG: <em>Sistema de monitorización distribuida</em> para calidad del aire con IoT.
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <div>
+      <div class="block-label">Certificaciones</div>
+      <div class="certs stagger">
+        <div class="cert-card">
+          <div class="icon-wrap icon-wrap-amber" aria-hidden="true">
+            <!-- Award / badge -->
+            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+          </div>
+          <div>
+            <div class="cert-name">Auditor Interno ISO/IEC 27001</div>
+            <div class="cert-issuer">Information Security Management System</div>
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="icon-wrap icon-wrap-amber" aria-hidden="true">
+            <!-- Scroll / diploma -->
+            <svg class="icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+          </div>
+          <div>
+            <div class="cert-name">Máster en Seguridad de las TIC</div>
+            <div class="cert-issuer">Universidad Europea de Madrid</div>
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="icon-wrap icon-wrap-amber" aria-hidden="true">
+            <!-- Graduation cap -->
+            <svg class="icon" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5"/><path d="M6 12v5c3.33 3 8.67 3 12 0v-5"/></svg>
+          </div>
+          <div>
+            <div class="cert-name">Ing. Informática — Redes y Sistemas</div>
+            <div class="cert-issuer">Universidad Pontificia de Salamanca</div>
+          </div>
+        </div>
+      </div>
+ 
+      <!-- Terminal block -->
+      <div class="terminal" aria-label="Resumen de perfil en formato terminal" role="complementary">
+        <div class="terminal-bar" aria-hidden="true">
+          <span class="dot dot-r"></span>
+          <span class="dot dot-y"></span>
+          <span class="dot dot-g"></span>
+        </div>
+        <div class="terminal-body">
+          <div><span class="tp">$</span> whoami</div>
+          <div>marcos.lopez</div>
+          <div style="margin-top:.4rem"><span class="tp">$</span> cat profile.json</div>
+          <div>{</div>
+          <div>&nbsp;&nbsp;<span class="tk">"role"</span>: <span class="tv">"Network &amp; Security Engineer"</span>,</div>
+          <div>&nbsp;&nbsp;<span class="tk">"company"</span>: <span class="tv">"ACORDE Technologies"</span>,</div>
+          <div>&nbsp;&nbsp;<span class="tk">"iso_27001_auditor"</span>: <span class="tv">true</span>,</div>
+          <div>&nbsp;&nbsp;<span class="tk">"target"</span>: <span class="tv">"Big Four / Ciberseguridad"</span>,</div>
+          <div>&nbsp;&nbsp;<span class="tk">"available"</span>: <span class="tv">true</span></div>
+          <div>}</div>
+          <div style="margin-top:.4rem"><span class="tp">$</span> <span class="tc">█</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<div class="divider"></div>
+ 
+<!-- ════════ CONTACT ════════ -->
+<section id="contact" class="section" aria-labelledby="contact-h">
+  <div class="reveal">
+    <div class="eye">06 — Contacto</div>
+    <h2 class="sh" id="contact-h">Trabajemos juntos</h2>
+  </div>
+ 
+  <div class="contact-grid reveal">
+    <div>
+      <p class="contact-intro">
+        Disponible para posiciones en ciberseguridad, consultoría técnica o diseño de infraestructuras
+        seguras en entornos de gran escala.
+      </p>
+      <p class="contact-intro">
+        Busco incorporarme a equipos donde la <strong>seguridad y la infraestructura</strong>
+        no sean departamentos separados. Si trabajas en ciberseguridad, consultoría técnica
+        o arquitectura de sistemas en una empresa de referencia, me interesa escucharte.
+      </p>
+      <p class="contact-intro" style="margin-top:-1rem">
+        Abierto a posiciones de <strong>Engineer</strong>, <strong>GRC</strong> o
+        <strong>auditoría técnica</strong>. Respondo en menos de 24&nbsp;horas.
+      </p>
+ 
+      <div class="contact-links">
+ 
+        <a href=https://linkedin.com/in/marcos-lopez class="contact-link" target="_blank" rel="noopener noreferrer" aria-label="Perfil de LinkedIn de Marcos López (abre en nueva pestaña)">
+          <div class="icon-wrap icon-wrap-cyan" aria-hidden="true">
+            <!-- LinkedIn -->
+            <svg class="icon" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </div>
+          <div>
+            <div class="cl-lbl">LinkedIn</div>
+            <div class="cl-val">linkedin.com/in/marcoslopezavila</div>
+          </div>
+          <div class="cl-arrow" aria-hidden="true">→</div>
+        </a>
+ 
+        <a href=https://github.com/marcos-lopez class="contact-link" target="_blank" rel="noopener noreferrer" aria-label="Perfil de GitHub de Marcos López (abre en nueva pestaña)">
+          <div class="icon-wrap icon-wrap-cyan" aria-hidden="true">
+            <!-- GitHub -->
+            <svg class="icon" viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+          </div>
+          <div>
+            <div class="cl-lbl">GitHub</div>
+            <div class="cl-val">github.com/marcos-lopez</div>
+          </div>
+          <div class="cl-arrow" aria-hidden="true">→</div>
+        </a>
+ 
+        <a href=mailto:lopezavmarcos@gmail.com class="contact-link" aria-label="Enviar email a Marcos López">
+          <div class="icon-wrap icon-wrap-cyan" aria-hidden="true">
+            <!-- Mail -->
+            <svg class="icon" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </div>
+          <div>
+            <div class="cl-lbl">Email</div>
+            <div class="cl-val">lopezavmarcos@gmail.com</div>
+          </div>
+          <div class="cl-arrow" aria-hidden="true">→</div>
+        </a>
+ 
+      </div>
+    </div>
+ 
+    <div class="contact-cta">
+      <h3>¿Tienes una oportunidad?</h3>
+      <p>
+        Posiciones de interés: <strong>Security Engineer</strong>,
+        <strong>Network Security</strong>, <strong>GRC / Compliance</strong>,
+        <strong>Consultoría de Seguridad</strong> y roles de infraestructura avanzada
+        en entornos exigentes.
+      </p>
+      <p>
+        Si tu equipo diseña arquitecturas seguras, trabaja con grandes entornos de red
+        o necesita a alguien que entienda tanto el firewall como el análisis de riesgos,
+        hablemos.
+      </p>
+      <a href=mailto:lopezavmarcos@gmail.com class="btn btn-primary">Enviar mensaje</a>
+    </div>
+  </div>
+</section>
+ 
+</main><!-- /main -->
+ 
+<footer role="contentinfo">
+  <p>Marcos López &nbsp;·&nbsp; Network &amp; Security Engineer &nbsp;·&nbsp; <span>ACORDE Technologies</span> &nbsp;·&nbsp; España</p>
+  <p style="margin-top:.35rem; color:var(--t4);">Diseñado y construido con precisión · 2025</p>
+</footer>
+ 
+<!-- ════════ SCRIPTS ════════ -->
+<script>
+(function () {
+  'use strict';
+ 
+  /* ── Progress bar ── */
+  const bar = document.getElementById('progress');
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.documentElement.scrollHeight - innerHeight) * 100;
+    bar.style.width = Math.min(pct, 100) + '%';
+    nav.classList.toggle('scrolled', window.scrollY > 50);
+  }, { passive: true });
+ 
+  /* ── Active nav on scroll ── */
+  const navLinks = document.querySelectorAll('.nav-links a[data-section]');
+  const sections = ['about','skills','arquitecturas','projects','education','contact'].map(id => document.getElementById(id));
+ 
+  const navObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(a => a.classList.toggle('active', a.dataset.section === e.target.id));
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(s => s && navObs.observe(s));
+ 
+  /* ── Mobile menu ── */
+  const menu = document.getElementById('mobile-menu');
+  const hamburger = document.getElementById('hamburger-btn');
+ 
+  hamburger.addEventListener('click', () => {
+    const open = menu.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', String(open));
+    hamburger.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+ 
+  window.closeMenu = () => {
+    menu.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    hamburger.setAttribute('aria-label', 'Abrir menú');
+    document.body.style.overflow = '';
+  };
+ 
+  /* ── Typewriter ── */
+  const roles = [
+    'Network & Systems Engineer',
+    'Infrastructure Security Architect',
+    'ISO/IEC 27001 Internal Auditor',
+    'Network Infrastructure Designer',
+    'Security & GRC Specialist'
+  ];
+  let ri = 0, ci = 0, deleting = false;
+  const tw = document.getElementById('tw');
+ 
+  (function type() {
+    const cur = roles[ri];
+    tw.textContent = deleting ? cur.slice(0, --ci) : cur.slice(0, ++ci);
+    let ms = deleting ? 36 : 74;
+    if (!deleting && ci === cur.length)  { ms = 2600; deleting = true; }
+    else if (deleting && ci === 0)       { deleting = false; ri = (ri + 1) % roles.length; ms = 380; }
+    setTimeout(type, ms);
+  })();
+ 
+  /* ── Canvas network ── */
+  (function () {
+    const canvas = document.getElementById('hero-canvas');
+    const ctx = canvas.getContext('2d');
+    let pts = [];
+ 
+    function resize() {
+      canvas.width  = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+      const n = Math.floor((canvas.width * canvas.height) / 10500);
+      pts = Array.from({ length: n }, () => ({
+        x:  Math.random() * canvas.width,
+        y:  Math.random() * canvas.height,
+        vx: (Math.random() - .5) * .32,
+        vy: (Math.random() - .5) * .32,
+        r:  Math.random() * 1.6 + .7
+      }));
+    }
+ 
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const C = '34,211,238';
+      pts.forEach((p, i) => {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > canvas.width)  p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${C},.65)`;
+        ctx.fill();
+        for (let j = i + 1; j < pts.length; j++) {
+          const q = pts[j];
+          const dx = p.x - q.x, dy = p.y - q.y;
+          const d = Math.sqrt(dx*dx + dy*dy);
+          if (d < 135) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y);
+            ctx.strokeStyle = `rgba(${C},${(1 - d/135) * .32})`;
+            ctx.lineWidth = .5; ctx.stroke();
+          }
+        }
+      });
+      requestAnimationFrame(draw);
+    }
+ 
+    window.addEventListener('resize', resize, { passive: true });
+    resize(); draw();
+  })();
+ 
+  /* ── Scroll reveal (single + stagger) ── */
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); revealObs.unobserve(e.target); }
+    });
+  }, { threshold: .07 });
+ 
+  document.querySelectorAll('.reveal, .stagger').forEach(el => revealObs.observe(el));
+ 
+  /* ── Reduced motion: skip all animations ── */
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.reveal, .stagger, .stagger > *').forEach(el => {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+      el.style.transition = 'none';
+    });
+  }
+})();
+</script>
+ 
+</body>
+</html> 
