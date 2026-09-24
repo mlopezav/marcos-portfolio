@@ -1,1 +1,18 @@
+# Ficheros de metadatos de WSL/Windows
 *:Zone.Identifier
+
+# ── CVs personales ──────────────────────────────────────────────
+# No deben publicarse en el repositorio: contienen datos de contacto
+# y trayectoria completa en formato reutilizable por scrapers.
+# El portfolio ya expone públicamente lo que debe ser público.
+/GRC/
+/Redes, Sistemas, Infraestructura/
+CV_*.pdf
+
+# Regla de seguridad por defecto: ningún PDF entra al repo por accidente.
+*.pdf
+
+# Si algún día se publica un CV recortado y deliberadamente público
+# (p. ej. para el botón "Descargar CV" del portfolio), añadir aquí
+# su excepción explícita en lugar de relajar las reglas de arriba:
+# !assets/cv-publico.pdf
