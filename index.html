@@ -940,6 +940,7 @@
 
   <ul class="nav-links" role="list">
     <li><a href="#about"        data-section="about">Perfil</a></li>
+    <li><a href="#experience"   data-section="experience">Experiencia</a></li>
     <li><a href="#skills"       data-section="skills">Stack</a></li>
     <li><a href="#arquitecturas" data-section="arquitecturas">Arquitecturas</a></li>
     <li><a href="#projects"     data-section="projects">Proyectos</a></li>
@@ -979,23 +980,27 @@
     </div>
 
     <h1 class="hero-name">
-      Marcos<br>
-      <span class="stroke">López</span>
+      Marcos López<br>
+      <span class="stroke">Ávila</span>
     </h1>
 
     <p style="margin-top:1rem; font-family:var(--fm); color:var(--t2); font-size:.82rem; line-height:1.7; animation: fadeUp .65s var(--ease-out) .2s both;">
-      Network &amp; Infrastructure Security Engineer<br>
-      ISO/IEC 27001 Auditor · ACORDE Technologies
+      Network, Infrastructure &amp; Cybersecurity Engineer<br>
+      Auditor Interno ISO/IEC 27001 · ACORDE Technologies · Santander
     </p>
 
-    <p class="hero-role" aria-live="polite" aria-label="Rol actual">
-      <span id="tw"></span><span class="cursor" aria-hidden="true"></span>
+    <p class="hero-role">
+      <!-- Texto estable para lectores de pantalla: el span animado queda
+           oculto a la accesibilidad para no dictar letra por letra. -->
+      <span class="sr-only">Network, Infrastructure &amp; Cybersecurity Engineer, Consultor GRC y Auditor Interno ISO/IEC 27001.</span>
+      <span id="tw" aria-hidden="true"></span><span class="cursor" aria-hidden="true"></span>
     </p>
 
     <p class="hero-tagline">
-      Diseño infraestructuras de red resilientes y seguras en entornos de producción,
-      integrando alta disponibilidad, segmentación avanzada y controles alineados con ISO&nbsp;27001.<br><br>
-      Especializado en transformar entornos operativos en sistemas auditables, reproducibles y preparados para entornos críticos.
+      Diseño y securizo <strong>infraestructuras de red en producción</strong>: multisede,
+      alta disponibilidad y seguridad perimetral en entornos donde una caída cuesta dinero.<br><br>
+      Y las <strong>gobierno</strong>: implanto controles ISO/IEC 27001, analizo riesgos con MAGERIT
+      y colaboro en auditorías internas. El mismo perfil que configura el firewall justifica el control.
     </p>
 
     <div class="hero-actions">
@@ -1003,22 +1008,23 @@
       <a href="#contact"  class="btn btn-ghost">Contactar</a>
     </div>
 
-    <div class="hero-stats" aria-label="Estadísticas">
+    <div class="hero-stats" role="group" aria-label="Datos destacados del perfil">
       <div>
-        <div class="stat-val">3<em>+</em></div>
-        <div class="stat-lbl">Años experiencia</div>
+        <!-- data-since: el script recalcula los años para que no caduque -->
+        <div class="stat-val"><span id="yrs" data-since="2022-07">4</span><em>+</em></div>
+        <div class="stat-lbl">Años en producción</div>
       </div>
       <div>
-        <div class="stat-val">15<em>+</em></div>
-        <div class="stat-lbl">Tecnologías</div>
+        <div class="stat-val">27001</div>
+        <div class="stat-lbl">Auditor interno ISO/IEC</div>
       </div>
       <div>
         <div class="stat-val">2</div>
-        <div class="stat-lbl">Titulaciones</div>
+        <div class="stat-lbl">Titulaciones universitarias</div>
       </div>
       <div>
-        <div class="stat-val">1</div>
-        <div class="stat-lbl">Cert. ISO</div>
+        <div class="stat-val">2</div>
+        <div class="stat-lbl">Certificaciones técnicas</div>
       </div>
     </div>
   </div>
@@ -1036,46 +1042,34 @@
   <div class="about-grid reveal">
     <div class="about-text">
       <p>
-        Soy <strong>Ingeniero de Redes e Infraestructuras</strong> con especialización en seguridad,
-        actualmente en <code>ACORDE Technologies</code>. Mi trabajo consiste en diseñar y operar
-        infraestructuras de red de producción que combinan alta disponibilidad con controles de
-        seguridad reales.
+        Soy <strong>Ingeniero Informático</strong> especializado en redes, infraestructura y
+        ciberseguridad, actualmente en <code>ACORDE Technologies</code>. Diseño y opero las
+        redes que sostienen entornos de producción, y me ocupo de que sean seguras por diseño,
+        no securizadas a posteriori.
       </p>
       <p>
-        Mi formación abarca desde el diseño de redes a nivel ingenieril hasta el análisis de riesgos
-        y la implementación de controles bajo el marco <strong>ISO/IEC 27001</strong>. No solo
-        configuro equipos: entiendo el contexto de negocio detrás de cada decisión técnica.
+        Mi trabajo tiene dos mitades. Una es técnica y viene del día a día: arquitecturas
+        multisede con VPN SSL y túneles <strong>GRE/IPsec</strong>, alta disponibilidad con
+        <strong>VRRP</strong>, seguridad perimetral, virtualización y automatización en Python.
+        La otra viene del <strong>Máster en Seguridad de las TIC</strong> y de la certificación
+        como auditor: implantación de controles <strong>ISO/IEC 27001</strong>, análisis de riesgos
+        con <strong>MAGERIT</strong>, gestión de activos y colaboración en auditorías internas.
       </p>
       <p>
-        Trabajo en el punto de intersección entre <strong>infraestructura</strong>,
-        <strong>seguridad</strong> y <strong>automatización</strong>. Cuando las herramientas
-        existentes no son suficientes, las desarrollo — como el generador de configuraciones
-        MikroTik en producción.
-      </p>
-      <p>
-        Mi siguiente paso: incorporarme a un entorno de <strong>ciberseguridad avanzada</strong>,
-        consultoría técnica o diseño de arquitecturas seguras en organizaciones de envergadura.
-      </p>
-
-      <p>
-        No me limito a implementar infraestructura: diseño sistemas resilientes, seguros y auditables
-        alineados con necesidades reales de negocio.
+        Mi siguiente paso es un rol donde esas dos mitades cuenten como una: <strong>Cybersecurity
+        Engineer</strong>, <strong>consultoría de seguridad</strong> o <strong>GRC</strong>, en
+        organizaciones donde la seguridad tenga peso propio. Actualmente preparo la certificación
+        <strong>CompTIA Security+</strong>.
       </p>
 
       <div class="diff-callout" role="note" aria-label="Diferenciación profesional">
         <p>
-          <strong>Lo que me distingue:</strong> combino visión de red de extremo a extremo con
-          criterio de seguridad desde el diseño. No es común encontrar a alguien que sepa tanto
-          configurar un VRRP como auditar controles ISO 27001 o construir la herramienta
-          que automatiza el proceso.
+          <strong>Lo que me distingue:</strong> el mismo perfil que configura un firewall WatchGuard
+          o levanta un clúster VRRP es el que después justifica ese control ante una auditoría
+          ISO 27001. No es habitual encontrar las dos cosas en la misma persona, y en seguridad
+          es justo donde se pierden las cosas: entre quien diseña y quien cumple.
         </p>
       </div>
-
-      <p>
-        Mi enfoque no es solo técnico: tomo decisiones de diseño considerando impacto en disponibilidad,
-        seguridad y operativa. Trabajo cómodo tanto en la capa de infraestructura como en la definición
-        de controles y análisis de riesgos.
-      </p>
     </div>
 
     <div class="info-cards stagger">
@@ -1087,7 +1081,7 @@
         </div>
         <div>
           <div class="ic-title">Empresa actual</div>
-          <div class="ic-sub">ACORDE Technologies<br>Network &amp; Systems Engineer</div>
+          <div class="ic-sub">ACORDE Technologies<br>Network, Infrastructure &amp; Cybersecurity Engineer<br>Desde julio de 2022</div>
         </div>
       </div>
 
@@ -1120,7 +1114,7 @@
         </div>
         <div>
           <div class="ic-title">Objetivo profesional</div>
-          <div class="ic-sub">Security Engineer · GRC Analyst · Infrastructure Security Consultant<br>Posiciones en ciberseguridad, seguridad de red o auditoría técnica en empresas de consultoría, tecnología o sector financiero</div>
+          <div class="ic-sub">Cybersecurity Engineer · Consultor GRC · Infrastructure Security<br>Ciberseguridad, seguridad de red o auditoría técnica en consultoría, tecnología o sector financiero</div>
         </div>
       </div>
 
@@ -1131,7 +1125,7 @@
         </div>
         <div>
           <div class="ic-title">Ubicación</div>
-          <div class="ic-sub">España · Disponible para reubicación</div>
+          <div class="ic-sub">Santander, España<br>Disponible para reubicación e híbrido</div>
         </div>
       </div>
 
@@ -1141,18 +1135,114 @@
 
 <div class="divider"></div>
 
+<!-- ════════ EXPERIENCIA ════════ -->
+<section id="experience" class="section" aria-labelledby="exp-h">
+  <div class="reveal">
+    <div class="eye">02 — Trayectoria</div>
+    <h2 class="sh" id="exp-h">Experiencia profesional</h2>
+    <p class="ssub">
+      Lo que he diseñado, operado y auditado en entornos reales de producción.
+      Agrupado por las dos mitades del perfil, porque en mi día a día no están separadas.
+    </p>
+  </div>
+
+  <div class="reveal">
+    <article class="exp-item">
+      <div class="exp-head">
+        <div>
+          <div class="exp-role">Network, Infrastructure &amp; Cybersecurity Engineer</div>
+          <div class="exp-org">ACORDE Technologies · Santander, España</div>
+        </div>
+        <div class="exp-date">Julio 2022 — Actualidad</div>
+      </div>
+
+      <div class="exp-group">
+        <div class="exp-group-lbl">Redes e infraestructura crítica</div>
+        <ul class="exp-list">
+          <li>Diseñé e implanté la <strong>infraestructura de red y seguridad completa de un hub de frío</strong>
+            (cold storage), integrando routing, switching, seguridad perimetral, detección de intrusión
+            y alimentación redundante para garantizar la continuidad de un entorno donde una parada
+            compromete la mercancía.</li>
+          <li>Diseñé la <strong>arquitectura de comunicaciones multisede</strong> para clientes con múltiples
+            sedes remotas (ayuntamientos): VPN SSL, túneles GRE/IPsec y enrutamiento estático, con
+            <strong>failover automático</strong> entre fibra óptica principal y respaldo inalámbrico,
+            alta disponibilidad mediante VRRP y scripting, firewalls perimetrales WatchGuard y
+            redes gestionadas en la nube con Cisco Meraki y Zyxel Nebula.</li>
+          <li>Gestioné y administré infraestructuras <strong>Linux</strong> y plataformas virtualizadas sobre
+            <strong>Proxmox, VMware y Docker</strong>, respondiendo de la disponibilidad y la operación
+            de los servicios corporativos.</li>
+        </ul>
+      </div>
+
+      <div class="exp-group">
+        <div class="exp-group-lbl">Ciberseguridad, gobierno y cumplimiento</div>
+        <ul class="exp-list">
+          <li>Participé en las fases iniciales de un <strong>Plan Director de Seguridad</strong>,
+            contribuyendo al análisis diferencial frente a la norma y a la priorización de las
+            iniciativas que debían estructurar el <strong>SGSI</strong>.</li>
+          <li>Implanté <strong>controles de seguridad alineados con ISO/IEC 27001</strong>: gestión de riesgos,
+            gestión de activos y hardening, <strong>colaborando activamente en auditorías internas</strong>
+            e impulsando la definición y revisión de normativas y procedimientos de seguridad corporativos.</li>
+          <li>Reforcé la seguridad de sistemas y aplicaciones mediante <strong>evaluaciones técnicas de
+            vulnerabilidades</strong> con Nessus, Nmap y Burp Suite, aplicando buenas prácticas
+            <strong>OWASP</strong> y contribuyendo a la mejora continua de la postura de seguridad.</li>
+        </ul>
+      </div>
+
+      <div class="exp-group">
+        <div class="exp-group-lbl">Automatización y observabilidad</div>
+        <ul class="exp-list">
+          <li>Desarrollé y automaticé procesos de infraestructura con <strong>Python, FastAPI</strong> y
+            tecnologías web, incorporando herramientas de inteligencia artificial para agilizar la
+            generación de documentación técnica y configuraciones de red, reduciendo tareas repetitivas.</li>
+          <li>Integré plataformas de monitorización (<strong>Grafana, Wazuh, ThingsBoard</strong>) y protocolos
+            IoT (MQTT, Zigbee, LoRaWAN) en infraestructuras corporativas, reforzando la visibilidad
+            operativa y la detección temprana de incidencias.</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <!-- ════════ SKILLS ════════ -->
 <section id="skills" class="section" aria-labelledby="skills-h">
   <div class="reveal">
-    <div class="eye">02 — Competencias</div>
+    <div class="eye">03 — Competencias</div>
     <h2 class="sh" id="skills-h">Stack técnico</h2>
     <p class="ssub">
-      Tecnologías agrupadas por dominio. No es una lista de palabras clave —
-      es lo que uso en producción.
+      Agrupado por dominio. No es una lista de palabras clave para pasar filtros:
+      es lo que uso en producción y lo que he aplicado en auditoría.
     </p>
   </div>
 
   <div class="skills-grid stagger">
+
+    <div class="skill-card">
+      <div class="sk-head" aria-hidden="true">
+        <!-- Clipboard / compliance -->
+        <svg class="icon" viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="m9 14 2 2 4-4"/></svg>
+        <span class="sk-title">Gobierno, Riesgo y Cumplimiento</span>
+      </div>
+      <div class="tags" role="list" aria-label="Competencias de GRC">
+        <span class="tag amber" role="listitem">ISO/IEC 27001</span>
+        <span class="tag amber" role="listitem">SGSI</span>
+        <span class="tag amber" role="listitem">Plan Director de Seguridad</span>
+        <span class="tag amber" role="listitem">Auditoría interna</span>
+        <span class="tag amber" role="listitem">MAGERIT</span>
+        <span class="tag amber" role="listitem">NIS2</span>
+        <span class="tag hi" role="listitem">IEC 62443</span>
+        <span class="tag hi" role="listitem">Análisis de riesgos</span>
+        <span class="tag hi" role="listitem">Gestión de activos</span>
+        <span class="tag" role="listitem">RGPD</span>
+        <span class="tag" role="listitem">MITRE CAPEC / CWE</span>
+        <span class="tag" role="listitem">Normativas y procedimientos</span>
+        <span class="tag" role="listitem">Gestión de vulnerabilidades</span>
+        <span class="tag" role="listitem">Modelado de amenazas</span>
+        <span class="tag" role="listitem">Continuidad de negocio</span>
+      </div>
+    </div>
 
     <div class="skill-card">
       <div class="sk-head" aria-hidden="true">
@@ -1164,12 +1254,16 @@
         <span class="tag hi" role="listitem">MikroTik RouterOS</span>
         <span class="tag hi" role="listitem">VLANs</span>
         <span class="tag hi" role="listitem">VRRP / HA</span>
+        <span class="tag hi" role="listitem">GRE / IPsec</span>
         <span class="tag" role="listitem">Cisco IOS</span>
-        <span class="tag" role="listitem">D-Link</span>
-        <span class="tag" role="listitem">TP-Link</span>
-        <span class="tag" role="listitem">Zyxel</span>
+        <span class="tag" role="listitem">Cisco Meraki</span>
+        <span class="tag" role="listitem">Zyxel Nebula</span>
+        <span class="tag" role="listitem">SSL VPN</span>
+        <span class="tag" role="listitem">WireGuard</span>
+        <span class="tag" role="listitem">OpenVPN</span>
         <span class="tag" role="listitem">Routing &amp; Switching</span>
         <span class="tag" role="listitem">OSPF</span>
+        <span class="tag" role="listitem">TCP/IP · DNS · DHCP</span>
         <span class="tag" role="listitem">Alta Disponibilidad</span>
       </div>
     </div>
@@ -1181,15 +1275,18 @@
         <span class="sk-title">Seguridad</span>
       </div>
       <div class="tags" role="list" aria-label="Tecnologías de seguridad">
-        <span class="tag amber" role="listitem">ISO/IEC 27001</span>
         <span class="tag hi" role="listitem">WatchGuard</span>
         <span class="tag hi" role="listitem">Wazuh</span>
         <span class="tag hi" role="listitem">CrowdSec</span>
-        <span class="tag" role="listitem">Hacking Ético</span>
-        <span class="tag" role="listitem">Análisis de riesgos</span>
+        <span class="tag hi" role="listitem">Nessus</span>
+        <span class="tag" role="listitem">Burp Suite</span>
+        <span class="tag" role="listitem">Nmap</span>
+        <span class="tag" role="listitem">OWASP</span>
+        <span class="tag" role="listitem">Hardening</span>
+        <span class="tag" role="listitem">Seguridad perimetral</span>
         <span class="tag" role="listitem">Segmentación de red</span>
-        <span class="tag" role="listitem">Gestión de activos</span>
         <span class="tag" role="listitem">Firewall policies</span>
+        <span class="tag" role="listitem">Hacking Ético</span>
       </div>
     </div>
 
@@ -1201,10 +1298,12 @@
       </div>
       <div class="tags" role="list" aria-label="Tecnologías de sistemas">
         <span class="tag hi" role="listitem">Proxmox</span>
-        <span class="tag hi" role="listitem">Linux Debian</span>
-        <span class="tag" role="listitem">VMs</span>
+        <span class="tag hi" role="listitem">VMware</span>
+        <span class="tag hi" role="listitem">Linux Server</span>
+        <span class="tag" role="listitem">Docker</span>
+        <span class="tag" role="listitem">Portainer</span>
+        <span class="tag" role="listitem">Windows Server</span>
         <span class="tag" role="listitem">SQL</span>
-        <span class="tag" role="listitem">Servidores</span>
         <span class="tag" role="listitem">Administración de sistemas</span>
       </div>
     </div>
@@ -1223,6 +1322,9 @@
         <span class="tag" role="listitem">Alertas en tiempo real</span>
         <span class="tag" role="listitem">IoT Monitoring</span>
         <span class="tag" role="listitem">SNMP</span>
+        <span class="tag" role="listitem">MQTT</span>
+        <span class="tag" role="listitem">Zigbee</span>
+        <span class="tag" role="listitem">LoRaWAN</span>
       </div>
     </div>
 
@@ -1234,9 +1336,14 @@
       </div>
       <div class="tags" role="list" aria-label="Tecnologías de desarrollo">
         <span class="tag hi" role="listitem">FastAPI</span>
+        <span class="tag hi" role="listitem">Flask</span>
         <span class="tag hi" role="listitem">Vue.js</span>
         <span class="tag" role="listitem">Python</span>
         <span class="tag" role="listitem">REST APIs</span>
+        <span class="tag" role="listitem">JWT</span>
+        <span class="tag" role="listitem">Docker</span>
+        <span class="tag" role="listitem">Boto3 / S3</span>
+        <span class="tag" role="listitem">TypeScript</span>
         <span class="tag" role="listitem">Scripts RouterOS</span>
         <span class="tag" role="listitem">Automatización</span>
         <span class="tag" role="listitem">Claude Code</span>
@@ -1251,7 +1358,7 @@
 <!-- ════════ ARQUITECTURAS ════════ -->
 <section id="arquitecturas" class="section" aria-labelledby="arch-h">
   <div class="reveal">
-    <div class="eye">03 — Arquitecturas</div>
+    <div class="eye">04 — Arquitecturas</div>
     <h2 class="sh" id="arch-h">Diseños de referencia</h2>
     <p class="ssub">
       Patrones de arquitectura que aplico en producción. No son conceptos teóricos —
@@ -1486,7 +1593,7 @@
 <!-- ════════ PROJECTS ════════ -->
 <section id="projects" class="section" aria-labelledby="proj-h">
   <div class="reveal">
-    <div class="eye">04 — Proyectos</div>
+    <div class="eye">05 — Proyectos</div>
     <h2 class="sh" id="proj-h">Proyectos destacados</h2>
     <p class="ssub">
       Trabajo aplicado en entornos reales y de investigación.
@@ -1855,7 +1962,7 @@
 <!-- ════════ EDUCATION ════════ -->
 <section id="education" class="section" aria-labelledby="edu-h">
   <div class="reveal">
-    <div class="eye">05 — Formación</div>
+    <div class="eye">06 — Formación</div>
     <h2 class="sh" id="edu-h">Educación &amp; Certificaciones</h2>
   </div>
 
@@ -1868,9 +1975,11 @@
           <div class="tl-title">Máster en Seguridad de las TIC</div>
           <div class="tl-org">Universidad Europea de Madrid</div>
           <div class="tl-desc">
-            Especialización en ciberseguridad, análisis de riesgos, normativa y compliance.
-            TFM: <em>Securización de Edificios Inteligentes</em> — modelado de amenazas en entornos OT/IoT
-            con propuesta de controles ISO 27001.
+            Especialización en ciberseguridad, análisis de riesgos, normativa y cumplimiento.
+            TFM: <em>Securización de Edificios Inteligentes</em>. Identificación de activos con
+            <strong>MAGERIT</strong>, clasificación de amenazas con los marcos CAPEC, CWE y CVE de MITRE,
+            análisis comparativo de protocolos de edificio y catálogo de controles mapeado contra
+            ISO 27001, IEC 62443 y NIS2.
           </div>
         </div>
         <div class="tl-item">
@@ -1879,7 +1988,7 @@
           <div class="tl-org">Mención Redes y Sistemas · Universidad Pontificia de Salamanca</div>
           <div class="tl-desc">
             Especialización en arquitectura de redes, sistemas operativos y programación.
-            TFG: <em>Sistema de monitorización distribuida</em> para calidad del aire con IoT.
+            TFG: <em>Sistema de monitorización de calidad del aire mediante sensórica IoT</em>.
           </div>
         </div>
       </div>
@@ -1894,8 +2003,8 @@
             <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
           </div>
           <div>
-            <div class="cert-name"><a href="https://www.certipedia.com/quality_marks/0217523383" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--amber);padding-bottom:1px;">Auditor Interno ISO/IEC 27001</a></div>
-            <div class="cert-issuer">Information Security Management System</div>
+            <div class="cert-name"><a href="https://www.certipedia.com/quality_marks/0217523383" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--amber);padding-bottom:1px;">Internal Auditor ISO/IEC 27001:2022</a></div>
+            <div class="cert-issuer">TÜV Rheinland · verificable en Certipedia</div>
           </div>
         </div>
         <div class="cert-card">
@@ -1928,6 +2037,30 @@
             <div class="cert-issuer">MikroTik</div>
           </div>
         </div>
+        <div class="cert-card" style="border-style:dashed;">
+          <div class="icon-wrap icon-wrap-amber" aria-hidden="true">
+            <!-- Reloj: en curso -->
+            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <div>
+            <div class="cert-name">CompTIA Security+</div>
+            <div class="cert-issuer">CompTIA · en preparación</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Idiomas: estaban en el CV pero no en el portfolio -->
+      <div class="block-label" style="margin-top:2.25rem;">Idiomas</div>
+      <div class="certs">
+        <div class="cert-card">
+          <div class="icon-wrap icon-wrap-cyan" aria-hidden="true">
+            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div>
+            <div class="cert-name">Español nativo · Inglés B2</div>
+            <div class="cert-issuer">Inglés de conversación profesional</div>
+          </div>
+        </div>
       </div>
 
       <!-- Terminal block -->
@@ -1942,10 +2075,13 @@
           <div>marcos.lopez</div>
           <div style="margin-top:.4rem"><span class="tp">$</span> cat profile.json</div>
           <div>{</div>
-          <div>&nbsp;&nbsp;<span class="tk">"role"</span>: <span class="tv">"Network &amp; Security Engineer"</span>,</div>
+          <div>&nbsp;&nbsp;<span class="tk">"role"</span>: <span class="tv">"Network, Infrastructure &amp; Cybersecurity Engineer"</span>,</div>
           <div>&nbsp;&nbsp;<span class="tk">"company"</span>: <span class="tv">"ACORDE Technologies"</span>,</div>
+          <div>&nbsp;&nbsp;<span class="tk">"since"</span>: <span class="tv">"2022-07"</span>,</div>
+          <div>&nbsp;&nbsp;<span class="tk">"location"</span>: <span class="tv">"Santander, ES"</span>,</div>
           <div>&nbsp;&nbsp;<span class="tk">"iso_27001_auditor"</span>: <span class="tv">true</span>,</div>
-          <div>&nbsp;&nbsp;<span class="tk">"open_to"</span>: <span class="tv">["Security Engineer", "GRC Analyst", "Infra Security"]</span>,</div>
+          <div>&nbsp;&nbsp;<span class="tk">"certifying"</span>: <span class="tv">"CompTIA Security+"</span>,</div>
+          <div>&nbsp;&nbsp;<span class="tk">"open_to"</span>: <span class="tv">["Cybersecurity Engineer", "GRC", "Infra Security"]</span>,</div>
           <div>&nbsp;&nbsp;<span class="tk">"available"</span>: <span class="tv">true</span></div>
           <div>}</div>
           <div style="margin-top:.4rem"><span class="tp">$</span> <span class="tc">█</span></div>
@@ -1960,7 +2096,7 @@
 <!-- ════════ CONTACT ════════ -->
 <section id="contact" class="section" aria-labelledby="contact-h">
   <div class="reveal">
-    <div class="eye">06 — Contacto</div>
+    <div class="eye">07 — Contacto</div>
     <h2 class="sh" id="contact-h">Trabajemos juntos</h2>
   </div>
 
@@ -2042,8 +2178,8 @@
 </main><!-- /main -->
 
 <footer role="contentinfo">
-  <p>Marcos López &nbsp;·&nbsp; Network &amp; Security Engineer &nbsp;·&nbsp; <span>ACORDE Technologies</span> &nbsp;·&nbsp; España</p>
-  <p style="margin-top:.35rem; color:var(--t4);">Diseñado y construido con precisión · 2025</p>
+  <p>Marcos López Ávila &nbsp;·&nbsp; Network, Infrastructure &amp; Cybersecurity Engineer &nbsp;·&nbsp; <span>ACORDE Technologies</span> &nbsp;·&nbsp; Santander, España</p>
+  <p style="margin-top:.35rem; color:var(--t4);">Diseñado y construido con precisión · <span id="year">2026</span></p>
 </footer>
 
 <!-- ════════ SCRIPTS ════════ -->
