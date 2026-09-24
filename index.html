@@ -25,6 +25,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
+      color-scheme: dark;
       /* backgrounds */
       --bg:       #04070f;
       --bg2:      #080d1a;
@@ -47,8 +48,8 @@
       /* text */
       --t1:  #f1f5f9;
       --t2:  #94a3b8;
-      --t3:  #475569;
-      --t4:  #2a3a50;
+      --t3:  #7c8ba1;   /* 5.82:1 sobre --bg  — WCAG AA */
+      --t4:  #78879e;   /* 4.66:1 sobre .tech — WCAG AA */
       /* type */
       --fd: 'Syne', sans-serif;
       --fm: 'IBM Plex Mono', monospace;
@@ -58,7 +59,10 @@
       --ease-spring: cubic-bezier(.34,1.56,.64,1);
     }
 
-    html { scroll-behavior: smooth; font-size: 16px; }
+    html { font-size: 16px; }
+    @media (prefers-reduced-motion: no-preference) {
+      html { scroll-behavior: smooth; }
+    }
 
     body {
       background: var(--bg);
@@ -200,9 +204,12 @@
       display: flex; flex-direction: column;
       align-items: center; justify-content: center; gap: 1.75rem;
       opacity: 0; pointer-events: none;
-      transition: opacity .3s var(--ease-out);
+      /* visibility:hidden saca los enlaces del orden de tabulación.
+         Sin esto, un usuario de teclado recorre 6 enlaces invisibles. */
+      visibility: hidden;
+      transition: opacity .3s var(--ease-out), visibility .3s;
     }
-    #mobile-menu.open { opacity: 1; pointer-events: all; }
+    #mobile-menu.open { opacity: 1; pointer-events: all; visibility: visible; }
     #mobile-menu a {
       font-family: var(--fd);
       font-size: 1.9rem;
@@ -213,6 +220,56 @@
       min-height: 44px; display: flex; align-items: center;
     }
     #mobile-menu a:hover { color: var(--t1); }
+
+    /* Visible solo para lectores de pantalla */
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0;
+    }
+
+    /* ─── EXPERIENCIA ─── */
+    .exp-item {
+      background: var(--card); border: 1px solid var(--b0);
+      border-left: 2px solid var(--bc);
+      padding: 1.6rem 1.75rem; margin-bottom: 1.15rem;
+      transition: border-color .2s, transform .25s var(--ease-spring), box-shadow .2s;
+    }
+    .exp-item:hover {
+      border-color: var(--bc); transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(34,211,238,.07);
+    }
+    .exp-head {
+      display: flex; justify-content: space-between;
+      align-items: baseline; gap: 1rem; flex-wrap: wrap;
+      margin-bottom: 1.1rem; padding-bottom: 1rem;
+      border-bottom: 1px solid var(--b0);
+    }
+    .exp-role { font-family: var(--fd); font-weight: 700; font-size: 1.15rem; letter-spacing: -.015em; }
+    .exp-org  { font-family: var(--fm); font-size: .75rem; color: var(--cyan); margin-top: .25rem; }
+    .exp-date {
+      font-family: var(--fm); font-size: .65rem; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--t3);
+      border: 1px solid var(--b0); padding: .3rem .7rem; white-space: nowrap;
+    }
+    .exp-group { margin-bottom: 1.25rem; }
+    .exp-group:last-of-type { margin-bottom: 0; }
+    .exp-group-lbl {
+      font-family: var(--fm); font-size: .58rem; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--cyan); margin-bottom: .55rem;
+      display: flex; align-items: center; gap: .55rem;
+    }
+    .exp-group-lbl::after { content: ''; flex: 1; height: 1px; background: var(--b0); }
+    .exp-list { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
+    .exp-list li {
+      font-size: .875rem; color: var(--t2); line-height: 1.65;
+      position: relative; padding-left: 1.15rem;
+    }
+    .exp-list li::before {
+      content: '▸'; color: var(--cyan); font-size: .7rem;
+      position: absolute; left: 0; top: 0; line-height: 1.444rem;
+    }
+    .exp-list strong { color: var(--t1); font-weight: 600; }
 
     /* ─── HERO ─── */
     #hero {
@@ -553,12 +610,12 @@
     .arch-list li {
       font-family: var(--fm);
       font-size: .72rem; color: var(--t2); line-height: 1.5;
-      display: flex; align-items: baseline; gap: .5rem;
+      position: relative; padding-left: 1rem;
     }
     .arch-list li::before {
       content: '—';
-      color: var(--bc); flex-shrink: 0;
-      font-size: .65rem;
+      color: var(--cyan); font-size: .65rem;
+      position: absolute; left: 0; top: 0; line-height: 1.08rem;
     }
 
     .arch-value {
@@ -786,6 +843,28 @@
       .skills-grid { grid-template-columns: 1fr; }
     }
 
+    /* ─── PRINT ─── */
+    /* Un recruiter puede guardar la página como PDF. Sin esto saldría
+       con fondo oscuro, el nav fijo encima y el canvas en blanco. */
+    @media print {
+      *, *::before, *::after {
+        background: #fff !important; color: #000 !important;
+        box-shadow: none !important; text-shadow: none !important;
+      }
+      body::before, #progress, #nav, #mobile-menu,
+      #hero-canvas, .skip-link, .nav-hamburger { display: none !important; }
+      #hero { min-height: auto; padding: 0 0 1rem; }
+      .section { padding: 1.25rem 0; max-width: none; }
+      .reveal, .stagger, .stagger > * { opacity: 1 !important; transform: none !important; }
+      .skill-card, .proj-card, .arch-card, .info-card,
+      .cert-card, .contact-link, .contact-cta {
+        border: 1px solid #bbb !important; break-inside: avoid;
+      }
+      .proj-card, .arch-card, .exp-item { break-inside: avoid; }
+      a[href^="http"]::after { content: " (" attr(href) ")"; font-size: .7em; color: #555 !important; }
+      .tag, .tech { border: 1px solid #ccc !important; }
+    }
+
     /* ─── REDUCED MOTION ─── */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
@@ -798,7 +877,7 @@
 <!-- Skip navigation (accessibility) -->
 <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
-<div id="progress" role="progressbar" aria-hidden="true"></div>
+<div id="progress" aria-hidden="true"></div>
 
 <!-- ════════ NAV ════════ -->
 <nav id="nav" aria-label="Navegación principal">
@@ -824,12 +903,13 @@
 
 <!-- Mobile menu -->
 <div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menú de navegación móvil">
-  <a href="#about"         onclick="closeMenu()">Perfil</a>
-  <a href="#skills"        onclick="closeMenu()">Stack</a>
-  <a href="#arquitecturas" onclick="closeMenu()">Arquitecturas</a>
-  <a href="#projects"      onclick="closeMenu()">Proyectos</a>
-  <a href="#education"     onclick="closeMenu()">Formación</a>
-  <a href="#contact"       onclick="closeMenu()">Contacto</a>
+  <a href="#about">Perfil</a>
+  <a href="#experience">Experiencia</a>
+  <a href="#skills">Stack</a>
+  <a href="#arquitecturas">Arquitecturas</a>
+  <a href="#projects">Proyectos</a>
+  <a href="#education">Formación</a>
+  <a href="#contact">Contacto</a>
 </div>
 
 <!-- ════════ HERO ════════ -->
@@ -1137,31 +1217,31 @@
       <div style="padding:.9rem 1.25rem .5rem; border-bottom:1px solid var(--b0);">
         <svg viewBox="0 0 300 192" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;" aria-label="Diagrama VRRP y VLAN" role="img">
           <defs>
-            <marker id="a1" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0,6 2.5,0 5" fill="#475569"/></marker>
+            <marker id="a1" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0,6 2.5,0 5" fill="#7c8ba1"/></marker>
           </defs>
           <!-- Router A -->
           <rect x="6" y="8" width="108" height="40" rx="2" fill="#080d1a" stroke="#22d3ee" stroke-width="1"/>
           <text x="60" y="25" font-family="monospace,monospace" font-size="8.5" fill="#22d3ee" text-anchor="middle" font-weight="600">MikroTik A</text>
           <text x="60" y="39" font-family="monospace,monospace" font-size="7" fill="#94a3b8" text-anchor="middle">Primary · MASTER</text>
           <!-- Router B -->
-          <rect x="186" y="8" width="108" height="40" rx="2" fill="#080d1a" stroke="#475569" stroke-width="1" stroke-dasharray="3,2"/>
+          <rect x="186" y="8" width="108" height="40" rx="2" fill="#080d1a" stroke="#64748b" stroke-width="1" stroke-dasharray="3,2"/>
           <text x="240" y="25" font-family="monospace,monospace" font-size="8.5" fill="#94a3b8" text-anchor="middle" font-weight="600">MikroTik B</text>
-          <text x="240" y="39" font-family="monospace,monospace" font-size="7" fill="#475569" text-anchor="middle">Backup · SLAVE</text>
+          <text x="240" y="39" font-family="monospace,monospace" font-size="7" fill="#7c8ba1" text-anchor="middle">Backup · SLAVE</text>
           <!-- VRRP line -->
           <line x1="114" y1="28" x2="186" y2="28" stroke="#f59e0b" stroke-width="1" stroke-dasharray="4,3"/>
           <rect x="124" y="18" width="52" height="14" rx="2" fill="rgba(245,158,11,.12)"/>
           <text x="150" y="28.5" font-family="monospace,monospace" font-size="7" fill="#f59e0b" text-anchor="middle">VRRP · VIP</text>
           <!-- Lines to switch -->
-          <line x1="60" y1="48" x2="125" y2="94" stroke="#475569" stroke-width="1" marker-end="url(#a1)"/>
-          <line x1="240" y1="48" x2="175" y2="94" stroke="#475569" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#a1)"/>
+          <line x1="60" y1="48" x2="125" y2="94" stroke="#64748b" stroke-width="1" marker-end="url(#a1)"/>
+          <line x1="240" y1="48" x2="175" y2="94" stroke="#64748b" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#a1)"/>
           <!-- Switch -->
-          <rect x="85" y="94" width="130" height="30" rx="2" fill="#080d1a" stroke="#475569" stroke-width="1"/>
+          <rect x="85" y="94" width="130" height="30" rx="2" fill="#080d1a" stroke="#64748b" stroke-width="1"/>
           <text x="150" y="109" font-family="monospace,monospace" font-size="8" fill="#94a3b8" text-anchor="middle">Core Switch</text>
-          <text x="150" y="119" font-family="monospace,monospace" font-size="6.5" fill="#2a3a50" text-anchor="middle">802.1Q Trunk</text>
+          <text x="150" y="119" font-family="monospace,monospace" font-size="6.5" fill="#78879e" text-anchor="middle">802.1Q Trunk</text>
           <!-- Lines to VLANs -->
-          <line x1="115" y1="124" x2="52" y2="155" stroke="#475569" stroke-width="1" marker-end="url(#a1)"/>
-          <line x1="150" y1="124" x2="150" y2="155" stroke="#475569" stroke-width="1" marker-end="url(#a1)"/>
-          <line x1="185" y1="124" x2="248" y2="155" stroke="#475569" stroke-width="1" marker-end="url(#a1)"/>
+          <line x1="115" y1="124" x2="52" y2="155" stroke="#64748b" stroke-width="1" marker-end="url(#a1)"/>
+          <line x1="150" y1="124" x2="150" y2="155" stroke="#64748b" stroke-width="1" marker-end="url(#a1)"/>
+          <line x1="185" y1="124" x2="248" y2="155" stroke="#64748b" stroke-width="1" marker-end="url(#a1)"/>
           <!-- VLAN boxes -->
           <rect x="6" y="155" width="88" height="32" rx="2" fill="#080d1a" stroke="#22d3ee" stroke-width="1" opacity=".7"/>
           <text x="50" y="168" font-family="monospace,monospace" font-size="7.5" fill="#22d3ee" text-anchor="middle">VLAN 10</text>
@@ -1210,37 +1290,37 @@
       <div style="padding:.9rem 1.25rem .5rem; border-bottom:1px solid var(--b0);">
         <svg viewBox="0 0 300 162" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;" aria-label="Diagrama Stack de Monitorización" role="img">
           <defs>
-            <marker id="a2" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0,6 2.5,0 5" fill="#475569"/></marker>
+            <marker id="a2" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0,6 2.5,0 5" fill="#7c8ba1"/></marker>
           </defs>
           <!-- Source devices row -->
-          <rect x="6" y="8" width="66" height="28" rx="2" fill="#080d1a" stroke="#475569" stroke-width="1"/>
+          <rect x="6" y="8" width="66" height="28" rx="2" fill="#080d1a" stroke="#64748b" stroke-width="1"/>
           <text x="39" y="21" font-family="monospace,monospace" font-size="7.5" fill="#94a3b8" text-anchor="middle">Network</text>
           <text x="39" y="31" font-family="monospace,monospace" font-size="7.5" fill="#94a3b8" text-anchor="middle">Devices</text>
-          <rect x="82" y="8" width="66" height="28" rx="2" fill="#080d1a" stroke="#475569" stroke-width="1"/>
+          <rect x="82" y="8" width="66" height="28" rx="2" fill="#080d1a" stroke="#64748b" stroke-width="1"/>
           <text x="115" y="21" font-family="monospace,monospace" font-size="7.5" fill="#94a3b8" text-anchor="middle">Linux</text>
           <text x="115" y="31" font-family="monospace,monospace" font-size="7.5" fill="#94a3b8" text-anchor="middle">Servers</text>
-          <rect x="158" y="8" width="66" height="28" rx="2" fill="#080d1a" stroke="#475569" stroke-width="1"/>
+          <rect x="158" y="8" width="66" height="28" rx="2" fill="#080d1a" stroke="#64748b" stroke-width="1"/>
           <text x="191" y="21" font-family="monospace,monospace" font-size="7.5" fill="#94a3b8" text-anchor="middle">IoT /</text>
           <text x="191" y="31" font-family="monospace,monospace" font-size="7.5" fill="#94a3b8" text-anchor="middle">Sensors</text>
           <!-- Lines to Telegraf -->
-          <line x1="39" y1="36" x2="130" y2="62" stroke="#475569" stroke-width="1" marker-end="url(#a2)"/>
-          <line x1="115" y1="36" x2="140" y2="62" stroke="#475569" stroke-width="1" marker-end="url(#a2)"/>
-          <line x1="191" y1="36" x2="155" y2="62" stroke="#475569" stroke-width="1" marker-end="url(#a2)"/>
+          <line x1="39" y1="36" x2="130" y2="62" stroke="#64748b" stroke-width="1" marker-end="url(#a2)"/>
+          <line x1="115" y1="36" x2="140" y2="62" stroke="#64748b" stroke-width="1" marker-end="url(#a2)"/>
+          <line x1="191" y1="36" x2="155" y2="62" stroke="#64748b" stroke-width="1" marker-end="url(#a2)"/>
           <!-- Telegraf -->
           <rect x="86" y="62" width="128" height="28" rx="2" fill="#080d1a" stroke="#22d3ee" stroke-width="1"/>
           <text x="150" y="76" font-family="monospace,monospace" font-size="8" fill="#22d3ee" text-anchor="middle" font-weight="600">Telegraf</text>
-          <text x="150" y="86" font-family="monospace,monospace" font-size="6.5" fill="#475569" text-anchor="middle">SNMP · syslog · metrics</text>
+          <text x="150" y="86" font-family="monospace,monospace" font-size="6.5" fill="#7c8ba1" text-anchor="middle">SNMP · syslog · metrics</text>
           <!-- Telegraf → InfluxDB -->
-          <line x1="150" y1="90" x2="150" y2="104" stroke="#475569" stroke-width="1" marker-end="url(#a2)"/>
+          <line x1="150" y1="90" x2="150" y2="104" stroke="#64748b" stroke-width="1" marker-end="url(#a2)"/>
           <!-- InfluxDB -->
           <rect x="86" y="104" width="128" height="24" rx="2" fill="#080d1a" stroke="#22d3ee" stroke-width="1"/>
           <text x="150" y="120" font-family="monospace,monospace" font-size="8" fill="#22d3ee" text-anchor="middle" font-weight="600">InfluxDB · Time-series</text>
           <!-- InfluxDB → Grafana -->
-          <line x1="150" y1="128" x2="150" y2="138" stroke="#475569" stroke-width="1" marker-end="url(#a2)"/>
+          <line x1="150" y1="128" x2="150" y2="138" stroke="#64748b" stroke-width="1" marker-end="url(#a2)"/>
           <!-- Grafana + Alerts row -->
           <rect x="86" y="138" width="80" height="18" rx="2" fill="#080d1a" stroke="#22d3ee" stroke-width="1"/>
           <text x="126" y="150" font-family="monospace,monospace" font-size="7.5" fill="#22d3ee" text-anchor="middle">Grafana</text>
-          <line x1="166" y1="147" x2="178" y2="147" stroke="#475569" stroke-width="1" marker-end="url(#a2)"/>
+          <line x1="166" y1="147" x2="178" y2="147" stroke="#64748b" stroke-width="1" marker-end="url(#a2)"/>
           <rect x="178" y="138" width="36" height="18" rx="2" fill="rgba(245,158,11,.15)" stroke="#f59e0b" stroke-width="1"/>
           <text x="196" y="150" font-family="monospace,monospace" font-size="7" fill="#f59e0b" text-anchor="middle">Alerts</text>
         </svg>
@@ -1281,41 +1361,41 @@
       <div style="padding:.9rem 1.25rem .5rem; border-bottom:1px solid var(--b0);">
         <svg viewBox="0 0 300 158" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;" aria-label="Diagrama Pipeline Automatización MikroTik" role="img">
           <defs>
-            <marker id="a3r" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0,6 2.5,0 5" fill="#475569"/></marker>
+            <marker id="a3r" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0,6 2.5,0 5" fill="#7c8ba1"/></marker>
             <marker id="a3l" markerWidth="6" markerHeight="5" refX="1" refY="2.5" orient="auto"><polygon points="6 0,0 2.5,6 5" fill="#22d3ee"/></marker>
           </defs>
           <!-- Row 1: User → Vue → FastAPI -->
-          <rect x="6" y="10" width="72" height="28" rx="2" fill="#080d1a" stroke="#475569" stroke-width="1"/>
+          <rect x="6" y="10" width="72" height="28" rx="2" fill="#080d1a" stroke="#64748b" stroke-width="1"/>
           <text x="42" y="23" font-family="monospace,monospace" font-size="8" fill="#94a3b8" text-anchor="middle">Operador</text>
-          <text x="42" y="33" font-family="monospace,monospace" font-size="7" fill="#475569" text-anchor="middle">input JSON</text>
-          <line x1="78" y1="24" x2="92" y2="24" stroke="#475569" stroke-width="1" marker-end="url(#a3r)"/>
+          <text x="42" y="33" font-family="monospace,monospace" font-size="7" fill="#7c8ba1" text-anchor="middle">input JSON</text>
+          <line x1="78" y1="24" x2="92" y2="24" stroke="#64748b" stroke-width="1" marker-end="url(#a3r)"/>
           <rect x="92" y="10" width="72" height="28" rx="2" fill="#080d1a" stroke="#22d3ee" stroke-width="1"/>
           <text x="128" y="23" font-family="monospace,monospace" font-size="8" fill="#22d3ee" text-anchor="middle" font-weight="600">Vue.js</text>
-          <text x="128" y="33" font-family="monospace,monospace" font-size="7" fill="#475569" text-anchor="middle">Frontend</text>
-          <line x1="164" y1="24" x2="178" y2="24" stroke="#475569" stroke-width="1" marker-end="url(#a3r)"/>
+          <text x="128" y="33" font-family="monospace,monospace" font-size="7" fill="#7c8ba1" text-anchor="middle">Frontend</text>
+          <line x1="164" y1="24" x2="178" y2="24" stroke="#64748b" stroke-width="1" marker-end="url(#a3r)"/>
           <rect x="178" y="10" width="116" height="28" rx="2" fill="#080d1a" stroke="#22d3ee" stroke-width="1"/>
           <text x="236" y="23" font-family="monospace,monospace" font-size="8" fill="#22d3ee" text-anchor="middle" font-weight="600">FastAPI</text>
-          <text x="236" y="33" font-family="monospace,monospace" font-size="7" fill="#475569" text-anchor="middle">REST Backend</text>
+          <text x="236" y="33" font-family="monospace,monospace" font-size="7" fill="#7c8ba1" text-anchor="middle">REST Backend</text>
           <!-- Vertical connector right side -->
-          <line x1="236" y1="38" x2="236" y2="58" stroke="#475569" stroke-width="1" marker-end="url(#a3r)"/>
+          <line x1="236" y1="38" x2="236" y2="58" stroke="#64748b" stroke-width="1" marker-end="url(#a3r)"/>
           <!-- Row 2 right: Jinja2 -->
           <rect x="178" y="58" width="116" height="28" rx="2" fill="#080d1a" stroke="#22d3ee" stroke-width="1"/>
           <text x="236" y="71" font-family="monospace,monospace" font-size="8" fill="#22d3ee" text-anchor="middle" font-weight="600">Jinja2</text>
-          <text x="236" y="81" font-family="monospace,monospace" font-size="7" fill="#475569" text-anchor="middle">Template Engine</text>
+          <text x="236" y="81" font-family="monospace,monospace" font-size="7" fill="#7c8ba1" text-anchor="middle">Template Engine</text>
           <!-- Jinja2 → .rsc -->
-          <line x1="178" y1="72" x2="164" y2="72" stroke="#475569" stroke-width="1" marker-end="url(#a3l)"/>
+          <line x1="178" y1="72" x2="164" y2="72" stroke="#64748b" stroke-width="1" marker-end="url(#a3l)"/>
           <rect x="92" y="58" width="72" height="28" rx="2" fill="rgba(34,211,238,.08)" stroke="#22d3ee" stroke-width="1"/>
           <text x="128" y="71" font-family="monospace,monospace" font-size="8.5" fill="#22d3ee" text-anchor="middle" font-weight="600">.rsc</text>
-          <text x="128" y="81" font-family="monospace,monospace" font-size="7" fill="#475569" text-anchor="middle">RouterOS cfg</text>
+          <text x="128" y="81" font-family="monospace,monospace" font-size="7" fill="#7c8ba1" text-anchor="middle">RouterOS cfg</text>
           <!-- .rsc → MikroTik -->
-          <line x1="92" y1="72" x2="78" y2="72" stroke="#475569" stroke-width="1" marker-end="url(#a3l)"/>
+          <line x1="92" y1="72" x2="78" y2="72" stroke="#64748b" stroke-width="1" marker-end="url(#a3l)"/>
           <rect x="6" y="58" width="72" height="28" rx="2" fill="#080d1a" stroke="#22d3ee" stroke-width="1"/>
           <text x="42" y="71" font-family="monospace,monospace" font-size="8" fill="#22d3ee" text-anchor="middle" font-weight="600">MikroTik</text>
-          <text x="42" y="81" font-family="monospace,monospace" font-size="7" fill="#475569" text-anchor="middle">RouterOS</text>
+          <text x="42" y="81" font-family="monospace,monospace" font-size="7" fill="#7c8ba1" text-anchor="middle">RouterOS</text>
           <!-- Impact row -->
           <rect x="6" y="110" width="288" height="38" rx="2" fill="rgba(34,211,238,.05)" stroke="rgba(34,211,238,.2)" stroke-width="1"/>
           <text x="150" y="125" font-family="monospace,monospace" font-size="7" fill="#22d3ee" text-anchor="middle">horas → minutos · consistente · reproducible · sin CLI</text>
-          <text x="150" y="141" font-family="monospace,monospace" font-size="6.5" fill="#475569" text-anchor="middle">configuraciones idénticas en cada despliegue</text>
+          <text x="150" y="141" font-family="monospace,monospace" font-size="6.5" fill="#7c8ba1" text-anchor="middle">configuraciones idénticas en cada despliegue</text>
         </svg>
       </div>
       <div class="arch-body">
@@ -1604,7 +1684,7 @@
       <div style="padding:.9rem 1.6rem .5rem; border-bottom:1px solid var(--b0);">
         <svg viewBox="0 0 580 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;" aria-label="Diagrama arquitectura Security Lab" role="img">
           <defs>
-            <marker id="a4r" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0,6 2.5,0 5" fill="#475569"/></marker>
+            <marker id="a4r" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0,6 2.5,0 5" fill="#7c8ba1"/></marker>
             <marker id="a4rd" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0,6 2.5,0 5" fill="#f59e0b"/></marker>
             <marker id="a4g" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0,6 2.5,0 5" fill="#34d399"/></marker>
           </defs>
@@ -1612,20 +1692,20 @@
           <!-- Attacker -->
           <rect x="6" y="8" width="72" height="34" rx="2" fill="#080d1a" stroke="#f59e0b" stroke-width="1"/>
           <text x="42" y="23" font-family="monospace,monospace" font-size="7.5" fill="#f59e0b" text-anchor="middle">Atacante</text>
-          <text x="42" y="35" font-family="monospace,monospace" font-size="6.5" fill="#475569" text-anchor="middle">externo</text>
+          <text x="42" y="35" font-family="monospace,monospace" font-size="6.5" fill="#7c8ba1" text-anchor="middle">externo</text>
           <!-- Arrow to Firewall -->
           <line x1="78" y1="25" x2="96" y2="25" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="3,2" marker-end="url(#a4rd)"/>
           <!-- Firewall/CrowdSec -->
           <rect x="96" y="8" width="96" height="34" rx="2" fill="#080d1a" stroke="#f59e0b" stroke-width="1"/>
           <text x="144" y="22" font-family="monospace,monospace" font-size="7.5" fill="#f59e0b" text-anchor="middle">Firewall /</text>
           <text x="144" y="32" font-family="monospace,monospace" font-size="7.5" fill="#f59e0b" text-anchor="middle">CrowdSec</text>
-          <text x="144" y="37" font-family="monospace,monospace" font-size="6" fill="#475569" text-anchor="middle">IPS colaborativo</text>
+          <text x="144" y="37" font-family="monospace,monospace" font-size="6" fill="#7c8ba1" text-anchor="middle">IPS colaborativo</text>
           <!-- Arrow to Linux Target -->
           <line x1="192" y1="25" x2="210" y2="25" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="3,2" marker-end="url(#a4rd)"/>
           <!-- Linux Target -->
-          <rect x="210" y="8" width="88" height="34" rx="2" fill="#080d1a" stroke="#475569" stroke-width="1"/>
+          <rect x="210" y="8" width="88" height="34" rx="2" fill="#080d1a" stroke="#64748b" stroke-width="1"/>
           <text x="254" y="22" font-family="monospace,monospace" font-size="7.5" fill="#94a3b8" text-anchor="middle">Linux Target</text>
-          <text x="254" y="35" font-family="monospace,monospace" font-size="6.5" fill="#475569" text-anchor="middle">endpoint monitorizado</text>
+          <text x="254" y="35" font-family="monospace,monospace" font-size="6.5" fill="#7c8ba1" text-anchor="middle">endpoint monitorizado</text>
           <!-- Wazuh Agent on target -->
           <rect x="314" y="10" width="70" height="30" rx="2" fill="rgba(34,211,238,.08)" stroke="#22d3ee" stroke-width="1"/>
           <text x="349" y="23" font-family="monospace,monospace" font-size="7" fill="#22d3ee" text-anchor="middle">Wazuh</text>
@@ -1636,7 +1716,7 @@
           <rect x="402" y="8" width="90" height="34" rx="2" fill="#080d1a" stroke="#22d3ee" stroke-width="1"/>
           <text x="447" y="22" font-family="monospace,monospace" font-size="7.5" fill="#22d3ee" text-anchor="middle" font-weight="600">Wazuh</text>
           <text x="447" y="32" font-family="monospace,monospace" font-size="7" fill="#22d3ee" text-anchor="middle">Manager · SIEM</text>
-          <text x="447" y="38" font-family="monospace,monospace" font-size="6" fill="#475569" text-anchor="middle">correlación</text>
+          <text x="447" y="38" font-family="monospace,monospace" font-size="6" fill="#7c8ba1" text-anchor="middle">correlación</text>
           <!-- Arrow Wazuh Manager → Elastic -->
           <line x1="492" y1="25" x2="510" y2="25" stroke="#22d3ee" stroke-width="1" marker-end="url(#a4r)"/>
           <!-- Elastic Stack -->
@@ -1649,7 +1729,7 @@
           <!-- Block Action -->
           <rect x="400" y="82" width="94" height="30" rx="2" fill="rgba(52,211,153,.1)" stroke="#34d399" stroke-width="1"/>
           <text x="447" y="96" font-family="monospace,monospace" font-size="7.5" fill="#34d399" text-anchor="middle" font-weight="600">Respuesta Auto.</text>
-          <text x="447" y="107" font-family="monospace,monospace" font-size="6.5" fill="#475569" text-anchor="middle">bloqueo IP · alerta</text>
+          <text x="447" y="107" font-family="monospace,monospace" font-size="6.5" fill="#7c8ba1" text-anchor="middle">bloqueo IP · alerta</text>
           <!-- Arrow back to CrowdSec (response path) -->
           <line x1="400" y1="97" x2="200" y2="97" stroke="#34d399" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#a4g)"/>
           <line x1="200" y1="97" x2="144" y2="42" stroke="#34d399" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#a4g)"/>
@@ -1916,20 +1996,44 @@
 document.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
-  /* ── Progress bar ── */
+  /* Consulta viva: el usuario puede cambiar la preferencia sin recargar. */
+  const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const reduced = () => motionQuery.matches;
+
+  /* ── Progress bar + nav ──
+     Se agrupa en un rAF y se cachea la altura del documento: leer
+     scrollHeight en cada evento de scroll fuerza un reflow sincrónico. */
   const bar = document.getElementById('progress');
   const nav = document.getElementById('nav');
   if (bar && nav) {
-    window.addEventListener('scroll', () => {
-      const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
-      bar.style.width = Math.min(pct, 100) + '%';
+    let maxScroll = 0, ticking = false;
+
+    const measure = () => {
+      maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    };
+
+    const update = () => {
+      ticking = false;
+      const pct = maxScroll > 0 ? (window.scrollY / maxScroll) * 100 : 0;
+      bar.style.width = Math.min(Math.max(pct, 0), 100) + '%';
       nav.classList.toggle('scrolled', window.scrollY > 50);
+    };
+
+    measure();
+    window.addEventListener('scroll', () => {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
     }, { passive: true });
+    window.addEventListener('resize', measure, { passive: true });
+    // El contenido puede crecer al revelarse secciones; re-medimos si cambia.
+    if ('ResizeObserver' in window) {
+      new ResizeObserver(measure).observe(document.body);
+    }
+    update();
   }
 
   /* ── Active nav on scroll ── */
   const navLinks = document.querySelectorAll('.nav-links a[data-section]');
-  const sections = ['about','skills','arquitecturas','projects','education','contact']
+  const sections = ['about','experience','skills','arquitecturas','projects','education','contact']
     .map(id => document.getElementById(id))
     .filter(Boolean);
 
@@ -1944,64 +2048,88 @@ document.addEventListener('DOMContentLoaded', function () {
     sections.forEach(s => navObs.observe(s));
   }
 
-  /* ── Mobile menu ── */
+  /* ── Mobile menu ──
+     Cierra con Escape y devuelve el foco al botón, como exige un diálogo
+     modal. El CSS lo saca del orden de tabulación cuando está cerrado. */
   const menu      = document.getElementById('mobile-menu');
   const hamburger = document.getElementById('hamburger-btn');
 
-  if (menu && hamburger) {
-    hamburger.addEventListener('click', () => {
-      const open = menu.classList.toggle('open');
-      hamburger.setAttribute('aria-expanded', String(open));
-      hamburger.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
-      document.body.style.overflow = open ? 'hidden' : '';
-    });
+  const setMenu = (open) => {
+    if (!menu || !hamburger) return;
+    menu.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', String(open));
+    hamburger.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (!open) hamburger.focus();
+  };
 
-    window.closeMenu = () => {
-      menu.classList.remove('open');
-      hamburger.setAttribute('aria-expanded', 'false');
-      hamburger.setAttribute('aria-label', 'Abrir menú');
-      document.body.style.overflow = '';
-    };
-  } else {
-    window.closeMenu = function () {};
+  window.closeMenu = () => setMenu(false);
+
+  if (menu && hamburger) {
+    hamburger.addEventListener('click', () => setMenu(!menu.classList.contains('open')));
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menu.classList.contains('open')) setMenu(false);
+    });
   }
 
-  /* ── Typewriter ── */
+  /* ── Typewriter ──
+     El span está marcado aria-hidden en el HTML y acompañado de un texto
+     estático para lectores de pantalla: con aria-live se anunciaba letra
+     a letra. Con motion reducido se muestra el primer rol y no se anima. */
   const tw = document.getElementById('tw');
   if (tw) {
     const roles = [
-      'Network & Systems Engineer',
-      'Infrastructure Security Architect',
+      'Network, Infrastructure & Cybersecurity Engineer',
+      'Cybersecurity Consultant · GRC',
       'ISO/IEC 27001 Internal Auditor',
-      'Network Infrastructure Designer',
-      'Security & GRC Specialist'
+      'Infrastructure Security Engineer',
+      'Risk Management & Compliance'
     ];
-    let ri = 0, ci = 0, deleting = false;
 
-    (function type() {
-      const cur = roles[ri];
-      tw.textContent = deleting ? cur.slice(0, --ci) : cur.slice(0, ++ci);
-      let ms = deleting ? 36 : 74;
-      if (!deleting && ci === cur.length)  { ms = 2600; deleting = true; }
-      else if (deleting && ci === 0)       { deleting = false; ri = (ri + 1) % roles.length; ms = 380; }
-      setTimeout(type, ms);
-    })();
+    if (reduced()) {
+      tw.textContent = roles[0];
+    } else {
+      let ri = 0, ci = 0, deleting = false, timer = null;
+
+      const type = () => {
+        const cur = roles[ri];
+        tw.textContent = deleting ? cur.slice(0, --ci) : cur.slice(0, ++ci);
+        let ms = deleting ? 36 : 74;
+        if (!deleting && ci === cur.length)  { ms = 2600; deleting = true; }
+        else if (deleting && ci === 0)       { deleting = false; ri = (ri + 1) % roles.length; ms = 380; }
+        timer = setTimeout(type, ms);
+      };
+      type();
+
+      // Si el usuario activa "reducir movimiento" en caliente, paramos.
+      motionQuery.addEventListener('change', () => {
+        if (reduced()) { clearTimeout(timer); tw.textContent = roles[0]; }
+      });
+    }
   }
 
-  /* ── Canvas network ── */
+  /* ── Canvas network ──
+     Tres arreglos sobre la versión anterior: se escala por devicePixelRatio
+     (antes se veía borroso en pantallas HiDPI), se detiene cuando el hero
+     sale de la pantalla o hay motion reducido (antes el bucle no paraba
+     nunca) y el resize se agrupa en un rAF. */
   const canvas = document.getElementById('hero-canvas');
-  if (canvas) {
+  if (canvas && !reduced()) {
     const ctx = canvas.getContext('2d');
-    let pts = [];
+    let pts = [], rafId = null, visible = true, resizePending = false;
 
     function resize() {
-      canvas.width  = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-      if (canvas.width === 0 || canvas.height === 0) return;
-      const n = Math.floor((canvas.width * canvas.height) / 10500);
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const w = canvas.offsetWidth, h = canvas.offsetHeight;
+      if (!w || !h) return;
+      canvas.width  = Math.round(w * dpr);
+      canvas.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const n = Math.min(Math.floor((w * h) / 10500), 160); // techo: coste O(n²)
       pts = Array.from({ length: n }, () => ({
-        x:  Math.random() * canvas.width,
-        y:  Math.random() * canvas.height,
+        x:  Math.random() * w,
+        y:  Math.random() * h,
         vx: (Math.random() - .5) * .32,
         vy: (Math.random() - .5) * .32,
         r:  Math.random() * 1.6 + .7
@@ -2009,13 +2137,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function draw() {
-      if (!canvas.width || !canvas.height) { requestAnimationFrame(draw); return; }
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const w = canvas.offsetWidth, h = canvas.offsetHeight;
+      ctx.clearRect(0, 0, w, h);
       const C = '34,211,238';
-      pts.forEach((p, i) => {
+      for (let i = 0; i < pts.length; i++) {
+        const p = pts[i];
         p.x += p.vx; p.y += p.vy;
-        if (p.x < 0 || p.x > canvas.width)  p.vx *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+        if (p.x < 0 || p.x > w) p.vx *= -1;
+        if (p.y < 0 || p.y > h) p.vy *= -1;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${C},.65)`;
@@ -2023,41 +2152,72 @@ document.addEventListener('DOMContentLoaded', function () {
         for (let j = i + 1; j < pts.length; j++) {
           const q = pts[j];
           const dx = p.x - q.x, dy = p.y - q.y;
-          const d = Math.sqrt(dx * dx + dy * dy);
-          if (d < 135) {
+          const d2 = dx * dx + dy * dy;
+          if (d2 < 18225) { // 135² — evitamos la raíz cuadrada en el bucle interno
+            const d = Math.sqrt(d2);
             ctx.beginPath();
             ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y);
             ctx.strokeStyle = `rgba(${C},${(1 - d / 135) * .32})`;
             ctx.lineWidth = .5; ctx.stroke();
           }
         }
-      });
-      requestAnimationFrame(draw);
+      }
+      rafId = requestAnimationFrame(draw);
     }
 
-    window.addEventListener('resize', resize, { passive: true });
+    const start = () => { if (rafId === null) rafId = requestAnimationFrame(draw); };
+    const stop  = () => { if (rafId !== null) { cancelAnimationFrame(rafId); rafId = null; } };
+
+    window.addEventListener('resize', () => {
+      if (resizePending) return;
+      resizePending = true;
+      requestAnimationFrame(() => { resizePending = false; resize(); });
+    }, { passive: true });
+
+    // No pintar el hero cuando no se ve, ni con la pestaña en segundo plano.
+    new IntersectionObserver(([e]) => {
+      visible = e.isIntersecting;
+      visible && !document.hidden ? start() : stop();
+    }).observe(canvas);
+
+    document.addEventListener('visibilitychange', () => {
+      document.hidden || !visible ? stop() : start();
+    });
+
+    motionQuery.addEventListener('change', () => { if (reduced()) stop(); });
+
     resize();
-    draw();
+    start();
   }
 
   /* ── Scroll reveal (single + stagger) ── */
   const revealEls = document.querySelectorAll('.reveal, .stagger');
   if (revealEls.length) {
-    const revealObs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('in'); revealObs.unobserve(e.target); }
-      });
-    }, { threshold: .07 });
-    revealEls.forEach(el => revealObs.observe(el));
+    if (reduced()) {
+      revealEls.forEach(el => el.classList.add('in'));
+    } else {
+      const revealObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { e.target.classList.add('in'); revealObs.unobserve(e.target); }
+        });
+      }, { threshold: .07 });
+      revealEls.forEach(el => revealObs.observe(el));
+    }
   }
 
-  /* ── Reduced motion: skip all animations ── */
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    document.querySelectorAll('.reveal, .stagger, .stagger > *').forEach(el => {
-      el.style.opacity    = '1';
-      el.style.transform  = 'none';
-      el.style.transition = 'none';
-    });
+  /* ── Cifras que caducan solas ──
+     El año del footer y los años de experiencia se calculaban a mano y se
+     quedaban obsoletos. El HTML lleva un valor de respaldo por si no hay JS. */
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  const yrsEl = document.getElementById('yrs');
+  if (yrsEl && yrsEl.dataset.since) {
+    const [y, m] = yrsEl.dataset.since.split('-').map(Number);
+    const now = new Date();
+    const months = (now.getFullYear() - y) * 12 + (now.getMonth() + 1 - m);
+    const years = Math.floor(months / 12);
+    if (years > 0) yrsEl.textContent = String(years);
   }
 });
 </script>
