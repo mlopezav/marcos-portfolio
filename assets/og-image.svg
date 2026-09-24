@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Marcos López Ávila — Network, Infrastructure &amp; Cybersecurity Engineer">
+  <defs>
+    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0"   stop-color="#22d3ee"/>
+      <stop offset="1"   stop-color="#f59e0b"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="0.7" y2="1">
+      <stop offset="0" stop-color="#22d3ee" stop-opacity="0.13"/>
+      <stop offset="1" stop-color="#04070f" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="#04070f"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect x="0" y="0" width="1200" height="5" fill="url(#edge)"/>
+
+  <!-- Retícula de nodos: eco del canvas del hero -->
+  <g stroke="#22d3ee" stroke-opacity="0.20" stroke-width="1">
+    <path d="M905 120 L1035 175 M1035 175 L980 300 M980 300 L850 255 M850 255 L905 120 M1035 175 L1120 265 M980 300 L1060 400 M850 255 L900 390 M900 390 L1060 400"/>
+  </g>
+  <g fill="#22d3ee" fill-opacity="0.55">
+    <circle cx="905" cy="120" r="4"/><circle cx="1035" cy="175" r="5"/>
+    <circle cx="980" cy="300" r="4"/><circle cx="850" cy="255" r="3.5"/>
+    <circle cx="1120" cy="265" r="4"/><circle cx="1060" cy="400" r="3.5"/>
+    <circle cx="900" cy="390" r="4.5"/>
+  </g>
+
+  <!-- Badge -->
+  <rect x="80" y="92" width="286" height="34" fill="#22d3ee" fill-opacity="0.10" stroke="#22d3ee" stroke-opacity="0.30"/>
+  <circle cx="99" cy="109" r="3.5" fill="#22d3ee"/>
+  <text x="114" y="114" font-family="Ubuntu Mono, DejaVu Sans Mono, monospace" font-size="14.5" letter-spacing="1.8" fill="#22d3ee">DISPONIBLE PARA OPORTUNIDADES</text>
+
+  <!-- Nombre -->
+  <text x="80" y="232" font-family="Ubuntu, DejaVu Sans, sans-serif" font-size="92" font-weight="bold" fill="#f1f5f9" letter-spacing="-2.5">Marcos López</text>
+  <text x="80" y="322" font-family="Ubuntu, DejaVu Sans, sans-serif" font-size="92" font-weight="bold" fill="none" stroke="#f1f5f9" stroke-opacity="0.30" stroke-width="1.2" letter-spacing="-2.5">Ávila</text>
+
+  <!-- Rol -->
+  <text x="80" y="386" font-family="Ubuntu Mono, DejaVu Sans Mono, monospace" font-size="25" fill="#22d3ee">Network, Infrastructure &amp; Cybersecurity Engineer</text>
+  <text x="80" y="422" font-family="Ubuntu Mono, DejaVu Sans Mono, monospace" font-size="19" fill="#94a3b8">ISO/IEC 27001 Internal Auditor  ·  GRC  ·  Risk Management</text>
+
+  <!-- Separador -->
+  <rect x="80" y="468" width="1040" height="1" fill="#ffffff" fill-opacity="0.10"/>
+
+  <!-- Pie de competencias -->
+  <text x="80" y="512" font-family="Ubuntu Mono, DejaVu Sans Mono, monospace" font-size="17" fill="#7c8ba1" letter-spacing="0.6">MikroTik  ·  Cisco  ·  WatchGuard  ·  Proxmox  ·  Wazuh  ·  Python  ·  ISO 27001</text>
+
+  <text x="80" y="566" font-family="Ubuntu Mono, DejaVu Sans Mono, monospace" font-size="17" fill="#f59e0b">ACORDE Technologies</text>
+  <text x="1120" y="566" text-anchor="end" font-family="Ubuntu Mono, DejaVu Sans Mono, monospace" font-size="17" fill="#7c8ba1">Santander, España</text>
+</svg>

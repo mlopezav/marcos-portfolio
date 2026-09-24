@@ -3,17 +3,72 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Marcos López — Network &amp; Security Engineer</title>
+  <title>Marcos López Ávila — Network, Infrastructure &amp; Cybersecurity Engineer</title>
 
-  <!-- SEO -->
-  <meta name="description" content="Portfolio de Marcos López — Network &amp; Infrastructure Security Engineer, ISO/IEC 27001 Auditor. Especialista en infraestructuras de red, ciberseguridad y sistemas en ACORDE Technologies." />
-  <meta name="keywords" content="Marcos López, Network Engineer, Security Engineer, MikroTik, ISO 27001, Ciberseguridad, Infraestructura de Red, Wazuh, CrowdSec, Proxmox, Grafana, España" />
-  <meta name="author" content="Marcos López" />
-  <meta property="og:title" content="Marcos López — Network &amp; Security Engineer" />
-  <meta property="og:description" content="Network &amp; Infrastructure Security Engineer · ISO/IEC 27001 Auditor · ACORDE Technologies" />
-  <meta property="og:type" content="website" />
+  <!-- ── SEO ──
+       BASE_URL asumida: GitHub Pages del repo. Si se configura un dominio
+       propio (CNAME), hay que actualizar canonical, og:url y og:image. -->
+  <link rel="canonical" href="https://mlopezav.github.io/marcos-portfolio/" />
+  <meta name="description" content="Marcos López Ávila — Network, Infrastructure &amp; Cybersecurity Engineer en ACORDE Technologies. Auditor Interno ISO/IEC 27001. Redes multisede, alta disponibilidad, seguridad perimetral, gestión de riesgos y GRC." />
+  <meta name="author" content="Marcos López Ávila" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="theme-color" content="#04070f" />
+
+  <!-- Open Graph / LinkedIn -->
+  <meta property="og:type" content="profile" />
+  <meta property="og:site_name" content="Marcos López Ávila" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:url" content="https://mlopezav.github.io/marcos-portfolio/" />
+  <meta property="og:title" content="Marcos López Ávila — Network, Infrastructure &amp; Cybersecurity Engineer" />
+  <meta property="og:description" content="Auditor Interno ISO/IEC 27001 · Redes multisede y alta disponibilidad · Gestión de riesgos y GRC · ACORDE Technologies" />
+  <meta property="og:image" content="https://mlopezav.github.io/marcos-portfolio/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Marcos López Ávila — Network, Infrastructure &amp; Cybersecurity Engineer" />
+  <meta property="profile:first_name" content="Marcos" />
+  <meta property="profile:last_name" content="López Ávila" />
+
+  <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Marcos López — Network &amp; Security Engineer" />
+  <meta name="twitter:title" content="Marcos López Ávila — Network, Infrastructure &amp; Cybersecurity Engineer" />
+  <meta name="twitter:description" content="Auditor Interno ISO/IEC 27001 · Redes multisede y alta disponibilidad · Gestión de riesgos y GRC" />
+  <meta name="twitter:image" content="https://mlopezav.github.io/marcos-portfolio/assets/og-image.png" />
+
+  <!-- Favicon en línea: evita una petición extra y un 404 -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2304070f'/%3E%3Ctext x='16' y='23' font-family='sans-serif' font-size='19' font-weight='bold' fill='%23f1f5f9' text-anchor='middle'%3EM%3C/text%3E%3Ccircle cx='26' cy='24' r='3' fill='%2322d3ee'/%3E%3C/svg%3E" />
+  <link rel="apple-touch-icon" href="assets/og-image.png" />
+
+  <!-- Datos estructurados: permite a Google mostrar el perfil como entidad -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Marcos López Ávila",
+    "url": "https://mlopezav.github.io/marcos-portfolio/",
+    "image": "https://mlopezav.github.io/marcos-portfolio/assets/og-image.png",
+    "jobTitle": "Network, Infrastructure & Cybersecurity Engineer",
+    "email": "mailto:lopezavmarcos@gmail.com",
+    "address": { "@type": "PostalAddress", "addressLocality": "Santander", "addressCountry": "ES" },
+    "worksFor": { "@type": "Organization", "name": "ACORDE Technologies" },
+    "alumniOf": [
+      { "@type": "CollegeOrUniversity", "name": "Universidad Europea de Madrid" },
+      { "@type": "CollegeOrUniversity", "name": "Universidad Pontificia de Salamanca" }
+    ],
+    "hasCredential": [
+      { "@type": "EducationalOccupationalCredential", "name": "Internal Auditor ISO/IEC 27001:2022", "recognizedBy": { "@type": "Organization", "name": "TÜV Rheinland" } },
+      { "@type": "EducationalOccupationalCredential", "name": "MikroTik Certified Network Associate (MTCNA)", "recognizedBy": { "@type": "Organization", "name": "MikroTik" } }
+    ],
+    "knowsAbout": ["ISO/IEC 27001","Gestión de riesgos","MAGERIT","Seguridad de redes","MikroTik RouterOS","Cisco","WatchGuard","Alta disponibilidad","VRRP","GRE/IPsec","Proxmox","Wazuh","Python","Gobierno y cumplimiento"],
+    "knowsLanguage": [
+      { "@type": "Language", "name": "Español", "alternateName": "es" },
+      { "@type": "Language", "name": "Inglés", "alternateName": "en" }
+    ],
+    "sameAs": [
+      "https://www.linkedin.com/in/marcoslopezavila/",
+      "https://github.com/mlopezav"
+    ]
+  }
+  </script>
 
   <!-- Google Fonts with font-display:swap -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
