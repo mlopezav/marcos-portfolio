@@ -2,7 +2,12 @@
 
 # LinkedIn responde 999 a cualquier cliente que no sea un navegador: es su
 # medida anti-scraping, no un enlace roto. GitHub limita por frecuencia con 429.
-accept = [200, 206, 403, 429, 999]
+#
+# Los 5xx se aceptan porque indican un problema en el servidor remoto, no un
+# enlace mal escrito: un enlace realmente roto devuelve 404. Certipedia, que
+# verifica la certificación ISO, ya tumbó una ejecución con un 503 pasajero.
+# El objetivo es detectar enlaces incorrectos, no monitorizar a terceros.
+accept = [200, 206, 403, 429, 500, 502, 503, 504, 999]
 
 max_concurrency = 4
 timeout = 20
