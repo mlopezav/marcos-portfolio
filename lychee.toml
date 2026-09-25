@@ -1,0 +1,24 @@
+# Configuración del comprobador de enlaces.
+
+# LinkedIn responde 999 a cualquier cliente que no sea un navegador: es su
+# medida anti-scraping, no un enlace roto. GitHub limita por frecuencia con 429.
+accept = [200, 206, 403, 429, 999]
+
+max_concurrency = 4
+timeout = 20
+max_retries = 2
+user_agent = "Mozilla/5.0 (compatible; lychee; +https://github.com/lycheeverse/lychee)"
+
+exclude = [
+  # Son destinos de preconnect, no enlaces navegables: la raíz de ambos
+  # dominios responde 404 por diseño.
+  "^https://fonts\\.googleapis\\.com",
+  "^https://fonts\\.gstatic\\.com",
+  # Espacios de nombres de vocabularios, no páginas.
+  "^https?://schema\\.org",
+  "^http://www\\.w3\\.org",
+  "^https://openapi\\.vercel\\.sh",
+  # La propia URL canónica del sitio. No se puede comprobar antes de
+  # desplegar, y apuntaría a un 404 en cada CI previo a la publicación.
+  "^https://mlopezav\\.github\\.io",
+]

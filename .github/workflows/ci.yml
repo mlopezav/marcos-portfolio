@@ -1,0 +1,70 @@
+name: Verificación del portfolio
+
+# El sitio es estático y sin build, así que la red de seguridad no puede ser
+# "compila", tiene que ser "sigue siendo válido, accesible y sin enlaces rotos".
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  html:
+    name: Validez del marcado
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npx html-validate index.html marcos-lopez-avila-portfolio.html
+
+  csp:
+    name: Coherencia de la política de contenido
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      # Si alguien edita el <script> en línea sin regenerar el hash, el
+      # navegador bloquearía el script y la página perdería toda la
+      # interactividad sin error visible. Aquí falla en voz alta.
+      - run: node scripts/csp-hash.mjs
+
+  accesibilidad:
+    name: Accesibilidad (axe sobre navegador real)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Servir el sitio
+        run: npx http-server . -p 8080 --silent &
+      - name: Esperar al servidor
+        run: npx --yes wait-on http://127.0.0.1:8080/index.html --timeout 60000
+      # Navegador real, no jsdom: las reglas de contraste necesitan motor de
+      # render y es justo donde esta página arrastraba defectos.
+      - run: npm run check:a11y
+
+  enlaces:
+    name: Enlaces rotos
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress
+            --config lychee.toml
+            index.html marcos-lopez-avila-portfolio.html CV-elementos-TFM.md
+          fail: true

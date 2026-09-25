@@ -1,0 +1,22 @@
+{
+  "name": "marcos-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portfolio estático de Marcos López Ávila. Sin build: las dependencias son solo herramientas de verificación.",
+  "license": "UNLICENSED",
+  "type": "module",
+  "scripts": {
+    "serve": "npx http-server . -p 8080",
+    "check:html": "html-validate index.html marcos-lopez-avila-portfolio.html",
+    "check:csp": "node scripts/csp-hash.mjs",
+    "csp:write": "node scripts/csp-hash.mjs --write",
+    "check:a11y": "node scripts/a11y.mjs http://127.0.0.1:8080/index.html http://127.0.0.1:8080/marcos-lopez-avila-portfolio.html",
+    "check": "npm run check:html && npm run check:csp"
+  },
+  "devDependencies": {
+    "axe-core": "^4.10.2",
+    "html-validate": "^9.5.5",
+    "http-server": "^14.1.1",
+    "puppeteer": "^23.11.1"
+  }
+}

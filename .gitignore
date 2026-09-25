@@ -16,3 +16,9 @@ CV_*.pdf
 # (p. ej. para el botón "Descargar CV" del portfolio), añadir aquí
 # su excepción explícita en lugar de relajar las reglas de arriba:
 # !assets/cv-publico.pdf
+
+# Dependencias de las herramientas de verificación. El sitio no las necesita
+# para funcionar: no hay build, son solo para validar en local y en CI.
+node_modules/
+.cache/
+puppeteer-cache/
