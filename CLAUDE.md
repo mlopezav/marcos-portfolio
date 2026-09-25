@@ -20,10 +20,28 @@ componente de servidor.
 | `assets/og-image.svg` | Fuente editable de la imagen anterior |
 | `CV-elementos-TFM.md` | Material del TFM reutilizable en CV. Documentación, no se publica |
 
+## Verificación
+
+No hay build, pero sí red de seguridad. `npm install` y luego:
+
+| Comando | Qué comprueba |
+|---|---|
+| `npm run check` | Marcado válido y hash de la política de contenido |
+| `npm run check:html` | Solo el marcado |
+| `npm run check:csp` | Que el hash de `vercel.json` coincide con el `<script>` real |
+| `npm run check:a11y` | Accesibilidad con axe sobre navegador real (requiere `npm run serve` en otra terminal) |
+| `npm run csp:write` | Regenera el hash tras editar el JavaScript |
+
+Lo mismo se ejecuta en GitHub Actions en cada push, más comprobación de enlaces rotos.
+
+**Si editas el bloque `<script>`, ejecuta `npm run csp:write` y commitea el
+`vercel.json`.** La política autoriza ese script por su hash: si no coincide, el
+navegador lo bloquea y la página pierde toda la interactividad sin error visible.
+
 ## Cómo trabajar aquí
 
-- No hay nada que instalar, compilar ni lintar. Para previsualizar, abrir
-  `index.html` en el navegador o servir con `python3 -m http.server`.
+- No hay nada que compilar. Para previsualizar, abrir `index.html` en el
+  navegador o `npm run serve`.
 - Todo el CSS vive en el único bloque `<style>` del `<head>` y todo el JS en el
   único `<script>` antes de `</body>`. No hay ficheros CSS o JS externos.
 - El contenido está en español (`lang="es"`).
