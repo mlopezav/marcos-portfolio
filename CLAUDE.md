@@ -20,6 +20,38 @@ componente de servidor.
 | `assets/og-image.svg` | Fuente editable de la imagen anterior |
 | `CV-elementos-TFM.md` | Material del TFM reutilizable en CV. Documentación, no se publica |
 
+## Flujo de trabajo con Git y despliegue
+
+El repositorio está conectado a Vercel. **El despliegue lo dispara un push, así
+que la rama sobre la que se trabaja determina si algo sale a producción.**
+
+```
+WSL  →  dev  →  GitHub/dev  →  Vercel Preview  →  revisión  →  PR  →  main  →  Vercel Production
+```
+
+| Rama | Papel | Efecto de un push |
+|---|---|---|
+| `dev` | Desarrollo e integración. **Es la rama de trabajo por defecto** | Preview Deployment en Vercel |
+| `main` | Producción. Solo versiones estables y revisadas | Production Deployment en Vercel |
+
+### Reglas
+
+1. **Comprobar la rama antes de tocar nada:** `git branch --show-current`.
+   Si aparece `main`, cambiar a `dev` antes de modificar ficheros.
+2. Las modificaciones normales van en `dev`, nunca directamente en `main`.
+3. **No hacer push nunca.** Lo ejecuta siempre Marcos, también en `dev`.
+4. No fusionar `dev` en `main` sin autorización expresa. La promoción se hace
+   por Pull Request, una vez validado el Preview Deployment.
+5. Nunca `git push --force` sobre `main`.
+6. Antes de preparar un commit, revisar `git diff` y confirmar que no entran
+   ficheros accidentales, secretos, credenciales ni artefactos de Windows
+   (`*:Zone.Identifier`).
+7. Mantener el `.gitignore` al día.
+8. Mensajes de commit con Conventional Commits: `feat:`, `fix:`, `docs:`,
+   `refactor:`, `ci:`, `chore:`, con ámbito entre paréntesis cuando aporte
+   (`fix(a11y):`, `feat(seo):`).
+9. `main` debe estar siempre desplegable.
+
 ## Verificación
 
 No hay build, pero sí red de seguridad. `npm install` y luego:
