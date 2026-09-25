@@ -18,6 +18,9 @@ exclude = [
   "^https?://schema\\.org",
   "^http://www\\.w3\\.org",
   "^https://openapi\\.vercel\\.sh",
+  # El badge de estado devuelve 404 hasta que el workflow ha corrido al menos
+  # una vez, lo que crea una dependencia circular en el primer push.
+  "badge\\.svg$",
   # La propia URL canónica del sitio. No se puede comprobar antes de
   # desplegar, y apuntaría a un 404 en cada CI previo a la publicación.
   "^https://mlopezav\\.github\\.io",

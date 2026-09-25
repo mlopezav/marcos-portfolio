@@ -66,5 +66,5 @@ jobs:
           args: >-
             --no-progress
             --config lychee.toml
-            index.html marcos-lopez-avila-portfolio.html CV-elementos-TFM.md
+            index.html marcos-lopez-avila-portfolio.html CV-elementos-TFM.md README.md
           fail: true
