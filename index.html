@@ -103,8 +103,11 @@
       /* text */
       --t1:  #f1f5f9;
       --t2:  #94a3b8;
-      --t3:  #7c8ba1;   /* 5.82:1 sobre --bg  — WCAG AA */
-      --t4:  #78879e;   /* 4.66:1 sobre .tech — WCAG AA */
+      /* Los ratios se miden sobre el fondo REAL de cada componente, no sobre
+         --bg. El caso estrecho de --t3 es .arch-value, que lleva un tinte
+         cian encima de --card y sube el fondo a #10283a. */
+      --t3:  #8593a8;   /* 6.46:1 sobre --bg · 4.86:1 sobre .arch-value */
+      --t4:  #78879e;   /* 4.66:1 sobre .tech */
       /* type */
       --fd: 'Syne', sans-serif;
       --fm: 'IBM Plex Mono', monospace;
@@ -1399,7 +1402,7 @@
       <div style="padding:.9rem 1.25rem .5rem; border-bottom:1px solid var(--b0);">
         <svg viewBox="0 0 300 192" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;" aria-label="Diagrama VRRP y VLAN" role="img">
           <defs>
-            <marker id="a1" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0,6 2.5,0 5" fill="#7c8ba1"/></marker>
+            <marker id="a1" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0,6 2.5,0 5" fill="#8593a8"/></marker>
           </defs>
           <!-- Router A -->
           <rect x="6" y="8" width="108" height="40" rx="2" fill="#080d1a" stroke="#22d3ee" stroke-width="1"/>
@@ -1408,7 +1411,7 @@
           <!-- Router B -->
           <rect x="186" y="8" width="108" height="40" rx="2" fill="#080d1a" stroke="#64748b" stroke-width="1" stroke-dasharray="3,2"/>
           <text x="240" y="25" font-family="monospace,monospace" font-size="8.5" fill="#94a3b8" text-anchor="middle" font-weight="600">MikroTik B</text>
-          <text x="240" y="39" font-family="monospace,monospace" font-size="7" fill="#7c8ba1" text-anchor="middle">Backup · SLAVE</text>
+          <text x="240" y="39" font-family="monospace,monospace" font-size="7" fill="#8593a8" text-anchor="middle">Backup · SLAVE</text>
           <!-- VRRP line -->
           <line x1="114" y1="28" x2="186" y2="28" stroke="#f59e0b" stroke-width="1" stroke-dasharray="4,3"/>
           <rect x="124" y="18" width="52" height="14" rx="2" fill="rgba(245,158,11,.12)"/>
@@ -1473,7 +1476,7 @@
       <div style="padding:.9rem 1.25rem .5rem; border-bottom:1px solid var(--b0);">
         <svg viewBox="0 0 300 162" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;" aria-label="Diagrama Stack de Monitorización" role="img">
           <defs>
-            <marker id="a2" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0,6 2.5,0 5" fill="#7c8ba1"/></marker>
+            <marker id="a2" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0,6 2.5,0 5" fill="#8593a8"/></marker>
           </defs>
           <!-- Source devices row -->
           <rect x="6" y="8" width="66" height="28" rx="2" fill="#080d1a" stroke="#64748b" stroke-width="1"/>
@@ -1492,7 +1495,7 @@
           <!-- Telegraf -->
           <rect x="86" y="62" width="128" height="28" rx="2" fill="#080d1a" stroke="#22d3ee" stroke-width="1"/>
           <text x="150" y="76" font-family="monospace,monospace" font-size="8" fill="#22d3ee" text-anchor="middle" font-weight="600">Telegraf</text>
-          <text x="150" y="86" font-family="monospace,monospace" font-size="6.5" fill="#7c8ba1" text-anchor="middle">SNMP · syslog · metrics</text>
+          <text x="150" y="86" font-family="monospace,monospace" font-size="6.5" fill="#8593a8" text-anchor="middle">SNMP · syslog · metrics</text>
           <!-- Telegraf → InfluxDB -->
           <line x1="150" y1="90" x2="150" y2="104" stroke="#64748b" stroke-width="1" marker-end="url(#a2)"/>
           <!-- InfluxDB -->
@@ -1545,41 +1548,41 @@
       <div style="padding:.9rem 1.25rem .5rem; border-bottom:1px solid var(--b0);">
         <svg viewBox="0 0 300 158" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;" aria-label="Diagrama Pipeline Automatización MikroTik" role="img">
           <defs>
-            <marker id="a3r" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0,6 2.5,0 5" fill="#7c8ba1"/></marker>
+            <marker id="a3r" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0,6 2.5,0 5" fill="#8593a8"/></marker>
             <marker id="a3l" markerWidth="6" markerHeight="5" refX="1" refY="2.5" orient="auto"><polygon points="6 0,0 2.5,6 5" fill="#22d3ee"/></marker>
           </defs>
           <!-- Row 1: User → Vue → FastAPI -->
           <rect x="6" y="10" width="72" height="28" rx="2" fill="#080d1a" stroke="#64748b" stroke-width="1"/>
           <text x="42" y="23" font-family="monospace,monospace" font-size="8" fill="#94a3b8" text-anchor="middle">Operador</text>
-          <text x="42" y="33" font-family="monospace,monospace" font-size="7" fill="#7c8ba1" text-anchor="middle">input JSON</text>
+          <text x="42" y="33" font-family="monospace,monospace" font-size="7" fill="#8593a8" text-anchor="middle">input JSON</text>
           <line x1="78" y1="24" x2="92" y2="24" stroke="#64748b" stroke-width="1" marker-end="url(#a3r)"/>
           <rect x="92" y="10" width="72" height="28" rx="2" fill="#080d1a" stroke="#22d3ee" stroke-width="1"/>
           <text x="128" y="23" font-family="monospace,monospace" font-size="8" fill="#22d3ee" text-anchor="middle" font-weight="600">Vue.js</text>
-          <text x="128" y="33" font-family="monospace,monospace" font-size="7" fill="#7c8ba1" text-anchor="middle">Frontend</text>
+          <text x="128" y="33" font-family="monospace,monospace" font-size="7" fill="#8593a8" text-anchor="middle">Frontend</text>
           <line x1="164" y1="24" x2="178" y2="24" stroke="#64748b" stroke-width="1" marker-end="url(#a3r)"/>
           <rect x="178" y="10" width="116" height="28" rx="2" fill="#080d1a" stroke="#22d3ee" stroke-width="1"/>
           <text x="236" y="23" font-family="monospace,monospace" font-size="8" fill="#22d3ee" text-anchor="middle" font-weight="600">FastAPI</text>
-          <text x="236" y="33" font-family="monospace,monospace" font-size="7" fill="#7c8ba1" text-anchor="middle">REST Backend</text>
+          <text x="236" y="33" font-family="monospace,monospace" font-size="7" fill="#8593a8" text-anchor="middle">REST Backend</text>
           <!-- Vertical connector right side -->
           <line x1="236" y1="38" x2="236" y2="58" stroke="#64748b" stroke-width="1" marker-end="url(#a3r)"/>
           <!-- Row 2 right: Jinja2 -->
           <rect x="178" y="58" width="116" height="28" rx="2" fill="#080d1a" stroke="#22d3ee" stroke-width="1"/>
           <text x="236" y="71" font-family="monospace,monospace" font-size="8" fill="#22d3ee" text-anchor="middle" font-weight="600">Jinja2</text>
-          <text x="236" y="81" font-family="monospace,monospace" font-size="7" fill="#7c8ba1" text-anchor="middle">Template Engine</text>
+          <text x="236" y="81" font-family="monospace,monospace" font-size="7" fill="#8593a8" text-anchor="middle">Template Engine</text>
           <!-- Jinja2 → .rsc -->
           <line x1="178" y1="72" x2="164" y2="72" stroke="#64748b" stroke-width="1" marker-end="url(#a3l)"/>
           <rect x="92" y="58" width="72" height="28" rx="2" fill="rgba(34,211,238,.08)" stroke="#22d3ee" stroke-width="1"/>
           <text x="128" y="71" font-family="monospace,monospace" font-size="8.5" fill="#22d3ee" text-anchor="middle" font-weight="600">.rsc</text>
-          <text x="128" y="81" font-family="monospace,monospace" font-size="7" fill="#7c8ba1" text-anchor="middle">RouterOS cfg</text>
+          <text x="128" y="81" font-family="monospace,monospace" font-size="7" fill="#8593a8" text-anchor="middle">RouterOS cfg</text>
           <!-- .rsc → MikroTik -->
           <line x1="92" y1="72" x2="78" y2="72" stroke="#64748b" stroke-width="1" marker-end="url(#a3l)"/>
           <rect x="6" y="58" width="72" height="28" rx="2" fill="#080d1a" stroke="#22d3ee" stroke-width="1"/>
           <text x="42" y="71" font-family="monospace,monospace" font-size="8" fill="#22d3ee" text-anchor="middle" font-weight="600">MikroTik</text>
-          <text x="42" y="81" font-family="monospace,monospace" font-size="7" fill="#7c8ba1" text-anchor="middle">RouterOS</text>
+          <text x="42" y="81" font-family="monospace,monospace" font-size="7" fill="#8593a8" text-anchor="middle">RouterOS</text>
           <!-- Impact row -->
           <rect x="6" y="110" width="288" height="38" rx="2" fill="rgba(34,211,238,.05)" stroke="rgba(34,211,238,.2)" stroke-width="1"/>
           <text x="150" y="125" font-family="monospace,monospace" font-size="7" fill="#22d3ee" text-anchor="middle">horas → minutos · consistente · reproducible · sin CLI</text>
-          <text x="150" y="141" font-family="monospace,monospace" font-size="6.5" fill="#7c8ba1" text-anchor="middle">configuraciones idénticas en cada despliegue</text>
+          <text x="150" y="141" font-family="monospace,monospace" font-size="6.5" fill="#8593a8" text-anchor="middle">configuraciones idénticas en cada despliegue</text>
         </svg>
       </div>
       <div class="arch-body">
@@ -1978,7 +1981,7 @@
       <div style="padding:.9rem 1.6rem .5rem; border-bottom:1px solid var(--b0);">
         <svg viewBox="0 0 580 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;" aria-label="Diagrama arquitectura Security Lab" role="img">
           <defs>
-            <marker id="a4r" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0,6 2.5,0 5" fill="#7c8ba1"/></marker>
+            <marker id="a4r" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0,6 2.5,0 5" fill="#8593a8"/></marker>
             <marker id="a4rd" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0,6 2.5,0 5" fill="#f59e0b"/></marker>
             <marker id="a4g" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0,6 2.5,0 5" fill="#34d399"/></marker>
           </defs>
@@ -1986,20 +1989,20 @@
           <!-- Attacker -->
           <rect x="6" y="8" width="72" height="34" rx="2" fill="#080d1a" stroke="#f59e0b" stroke-width="1"/>
           <text x="42" y="23" font-family="monospace,monospace" font-size="7.5" fill="#f59e0b" text-anchor="middle">Atacante</text>
-          <text x="42" y="35" font-family="monospace,monospace" font-size="6.5" fill="#7c8ba1" text-anchor="middle">externo</text>
+          <text x="42" y="35" font-family="monospace,monospace" font-size="6.5" fill="#8593a8" text-anchor="middle">externo</text>
           <!-- Arrow to Firewall -->
           <line x1="78" y1="25" x2="96" y2="25" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="3,2" marker-end="url(#a4rd)"/>
           <!-- Firewall/CrowdSec -->
           <rect x="96" y="8" width="96" height="34" rx="2" fill="#080d1a" stroke="#f59e0b" stroke-width="1"/>
           <text x="144" y="22" font-family="monospace,monospace" font-size="7.5" fill="#f59e0b" text-anchor="middle">Firewall /</text>
           <text x="144" y="32" font-family="monospace,monospace" font-size="7.5" fill="#f59e0b" text-anchor="middle">CrowdSec</text>
-          <text x="144" y="37" font-family="monospace,monospace" font-size="6" fill="#7c8ba1" text-anchor="middle">IPS colaborativo</text>
+          <text x="144" y="37" font-family="monospace,monospace" font-size="6" fill="#8593a8" text-anchor="middle">IPS colaborativo</text>
           <!-- Arrow to Linux Target -->
           <line x1="192" y1="25" x2="210" y2="25" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="3,2" marker-end="url(#a4rd)"/>
           <!-- Linux Target -->
           <rect x="210" y="8" width="88" height="34" rx="2" fill="#080d1a" stroke="#64748b" stroke-width="1"/>
           <text x="254" y="22" font-family="monospace,monospace" font-size="7.5" fill="#94a3b8" text-anchor="middle">Linux Target</text>
-          <text x="254" y="35" font-family="monospace,monospace" font-size="6.5" fill="#7c8ba1" text-anchor="middle">endpoint monitorizado</text>
+          <text x="254" y="35" font-family="monospace,monospace" font-size="6.5" fill="#8593a8" text-anchor="middle">endpoint monitorizado</text>
           <!-- Wazuh Agent on target -->
           <rect x="314" y="10" width="70" height="30" rx="2" fill="rgba(34,211,238,.08)" stroke="#22d3ee" stroke-width="1"/>
           <text x="349" y="23" font-family="monospace,monospace" font-size="7" fill="#22d3ee" text-anchor="middle">Wazuh</text>
@@ -2010,7 +2013,7 @@
           <rect x="402" y="8" width="90" height="34" rx="2" fill="#080d1a" stroke="#22d3ee" stroke-width="1"/>
           <text x="447" y="22" font-family="monospace,monospace" font-size="7.5" fill="#22d3ee" text-anchor="middle" font-weight="600">Wazuh</text>
           <text x="447" y="32" font-family="monospace,monospace" font-size="7" fill="#22d3ee" text-anchor="middle">Manager · SIEM</text>
-          <text x="447" y="38" font-family="monospace,monospace" font-size="6" fill="#7c8ba1" text-anchor="middle">correlación</text>
+          <text x="447" y="38" font-family="monospace,monospace" font-size="6" fill="#8593a8" text-anchor="middle">correlación</text>
           <!-- Arrow Wazuh Manager → Elastic -->
           <line x1="492" y1="25" x2="510" y2="25" stroke="#22d3ee" stroke-width="1" marker-end="url(#a4r)"/>
           <!-- Elastic Stack -->
@@ -2023,7 +2026,7 @@
           <!-- Block Action -->
           <rect x="400" y="82" width="94" height="30" rx="2" fill="rgba(52,211,153,.1)" stroke="#34d399" stroke-width="1"/>
           <text x="447" y="96" font-family="monospace,monospace" font-size="7.5" fill="#34d399" text-anchor="middle" font-weight="600">Respuesta Auto.</text>
-          <text x="447" y="107" font-family="monospace,monospace" font-size="6.5" fill="#7c8ba1" text-anchor="middle">bloqueo IP · alerta</text>
+          <text x="447" y="107" font-family="monospace,monospace" font-size="6.5" fill="#8593a8" text-anchor="middle">bloqueo IP · alerta</text>
           <!-- Arrow back to CrowdSec (response path) -->
           <line x1="400" y1="97" x2="200" y2="97" stroke="#34d399" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#a4g)"/>
           <line x1="200" y1="97" x2="144" y2="42" stroke="#34d399" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#a4g)"/>

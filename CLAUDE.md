@@ -101,8 +101,12 @@ navegador lo bloquea y la página pierde toda la interactividad sin error visibl
   personalizadas en `:root`, al principio del bloque `<style>`. Reutilizarlos
   (`--bg`, `--cyan`, `--amber`, `--t1`…`--t4`, `--fd`/`--fm`/`--fb`) en lugar de
   escribir colores o fuentes nuevas.
-- Los tokens de texto cumplen WCAG AA sobre sus fondos. Si se cambian, hay que
-  recalcular el contraste: `--t3` da 5.82:1 y `--t4` 4.66:1.
+- Los tokens de texto cumplen WCAG AA **sobre el fondo real de cada
+  componente**, no sobre `--bg`. Es el error que costó dos rondas de CI: `--t3`
+  pasaba sobre el fondo de página pero fallaba sobre `.arch-value`, que lleva un
+  tinte cian encima de `--card` y sube el fondo a `#10283a`. Si se cambian, hay
+  que recalcular contra cada superficie: `--t3` da 6.46:1 sobre `--bg` y 4.86:1
+  sobre `.arch-value`; `--t4` da 4.66:1 sobre `.tech`.
 - Fuentes: `Syne` (titulares), `IBM Plex Mono` (etiquetas), `Instrument Sans` (texto).
 
 ### Accesibilidad

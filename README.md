@@ -67,11 +67,13 @@ Para los estilos sí se usa `'unsafe-inline'`: los atributos `style` sueltos no
 se pueden cubrir con hashes, y la inyección de estilos es mucho menos peligrosa
 que la de scripts. El resto de directivas quedan en `'none'`.
 
-**El contraste está calculado, no estimado.** Los tokens de texto cumplen
-WCAG AA sobre sus fondos concretos. Si se cambian, hay que recalcular: `--t3`
-da 5.82:1 y `--t4` 4.66:1. La auditoría de accesibilidad corre sobre un
-navegador real y no sobre jsdom precisamente porque las reglas de contraste
-necesitan motor de render.
+**El contraste se mide sobre el fondo real de cada componente, no sobre el de
+la página.** Es una distinción que parece pedante hasta que falla: `--t3` daba
+de sobra sobre el fondo general y se quedaba en 4.37:1 sobre los paneles con
+tinte cian, porque ese tinte aclara el fondo. Hoy da 6.46:1 sobre `--bg` y
+4.86:1 sobre el caso más estrecho. La auditoría corre sobre un navegador real y
+no sobre jsdom precisamente porque las reglas de contraste necesitan motor de
+render, y sin él este fallo no se ve.
 
 **Las viñetas de lista se posicionan en absoluto, nunca con `display: flex`
 sobre el `<li>`.** Con flex, cada `<strong>` o `<code>` dentro del texto se
